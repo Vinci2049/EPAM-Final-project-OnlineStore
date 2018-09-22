@@ -1,0 +1,66 @@
+package com.epam.training.onlineStore.dto.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
+
+import com.epam.training.onlineStore.dto.ProductDAO;
+import com.epam.training.onlineStore.dto.mapper.ProductMapper;
+import com.epam.training.onlineStore.model.Product;
+
+@Repository
+public class ProductDAOImpl implements ProductDAO {
+
+    private final JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    public ProductDAOImpl(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }	
+	
+	@Override
+	public List<Product> getAll() {
+		return this.jdbcTemplate.query("SELECT * FROM product", new ProductMapper());
+	}
+
+	@Override
+	public Product findById(long id) {
+		return this.jdbcTemplate.queryForObject("SELECT * FROM product WHERE id = ?",
+                new Object[]{id}, new ProductMapper());
+	}
+	
+	@Override
+	public long add(Product product) {
+//		//return this.jdbcTemplate.queryForObject("SELECT * FROM product WHERE id = ?",
+//        //        new Object[]{id}, new ProductMapper());
+//		//return this.jdbcTemplate.update("INSERT INTO product (product_id_user) VALUES " +
+//        //        "(?)", product.getProductIdUser());
+//		//this.jdbcTemplate.update("INSERT INTO product (name) VALUES (?)", "NAME1");
+//		return this.jdbcTemplate.update("INSERT INTO PRODUCT (name, price) VALUES"
+//                + "(?,?)"
+//		//, product.getIdProduct()
+//        , product.getName()
+//        , product.getPrice());
+
+		return this.jdbcTemplate.update("INSERT INTO PRODUCT (name, price) VALUES"
+                + "(?,?)"
+              , product.getName()
+              , product.getPrice());
+	}
+	
+	
+    //JdbcTemplate getJdbcTemplate() {
+      //  return jdbcTemplate;
+    //}
+
+    /*RowMapper<Product> getRowMapper() {
+        return rowMapper;
+    }*/
+
+	
+	
+	
+}
