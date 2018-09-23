@@ -1,9 +1,6 @@
 package com.epam.training.onlineStore.dto;
 
-import java.util.List;
-
 import com.epam.training.onlineStore.model.Cart;
-import com.epam.training.onlineStore.model.ProductListItem;
 
 public interface CartDAO {
 
@@ -11,6 +8,6 @@ public interface CartDAO {
 	
 	//List<ProductListItem> getProductList(long idClient);
 	
-	void addProductById(long idProduct);
+	int addProductById(long idProduct);
 	
 }

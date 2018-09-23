@@ -54,14 +54,14 @@ public class ProductController {
     
     
     @RequestMapping("/product/{productId}")
-    public ModelAndView book(HttpServletRequest request,
+    public ModelAndView product(HttpServletRequest request,
              @PathVariable(name = "productId", required = false) String productId) {
         
     	ModelAndView modelAndView = new ModelAndView();
         
         modelAndView.setViewName("product");
         
-       	int id = Integer.parseInt(productId);
+       	long id = Long.parseLong(productId);		// ВРЕМЕННО НЕ НАДО ЛИ В ПАРАМЕТРАХ СТРИНГ НА ЛОНГ?
         Product product = productService.findById(id);
 
         modelAndView.addObject("product", product);
@@ -108,7 +108,7 @@ public class ProductController {
     public String addProduct(HttpServletRequest request,
             @PathVariable(name = "pageId", required = false) String pageId) {
 
-     	Product product = new Product("name_name", 30.0);
+     	Product product = new Product("name_name", 30.0);	// ВРЕМЕННО УБРАТЬ PAGEID
      	
     	productService.add(product);
 

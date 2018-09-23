@@ -33,7 +33,7 @@ public class CartController {
     @RequestMapping("/cart")
     public ModelAndView hello(HttpServletRequest request,
             @PathVariable(name = "pageId", required = false) String pageId) {
-        ModelAndView modelAndView = new ModelAndView();
+        ModelAndView modelAndView = new ModelAndView();	// ВРЕМЕНО УБРАТЬ PAGEID
         
         //Map<Product, Integer> productList = cartService.getAll(idClient);
         
@@ -79,17 +79,25 @@ public class CartController {
   }*/
     
     
-    @RequestMapping(value = "/cart/addToCart", params = {"idProduct"}, method = RequestMethod.POST)
-    public String addTreatment(Model model, Product product,
-                               @RequestParam(value = "idProduct") Long idProduct) {
-        //cartService.updateTreatmentPatient(product, idProduct);
+    //@RequestMapping(value = "/cart/addToCart", params = {"idProduct"}, method = RequestMethod.POST)
+    //@RequestMapping("/cart/addToCart?{productId}")
+  //  @RequestMapping("/cart/addToCart?idProduct={ProductId}")
+    @RequestMapping("/cart/addToCart")
+   //public String addToCart(Model model,
+    //                           @RequestParam(value = "idProduct") Long idProduct) {
+    public String addToCart(HttpServletRequest request) {
+       //cartService.updateTreatmentPatient(product, idProduct);
 
     	
-	  	cartService.addProductById(idProduct);
+       	//long id = Long.parseLong(idProduct);
+        //Product product = productService.findById(id);
+    	
+	  	//cartService.addProductById(ProductId);
+	  	cartService.addProductById(1L);
     	
         //return listTreatment(model);
 	  	//return idProduct.toString();
-    	return "reditect:/index.html";
+    	return "redirect:/index.html";
     }
     
     

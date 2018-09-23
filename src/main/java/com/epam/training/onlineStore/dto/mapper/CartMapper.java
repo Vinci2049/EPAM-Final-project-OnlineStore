@@ -19,8 +19,6 @@ public class CartMapper implements RowMapper<Cart>{
 	public Cart mapRow(ResultSet rs, int rowNum) throws SQLException {
 		
 		Client client = new Client(1, "Name", "Surname");		
-
-		
 		
 		List<ProductListItem> productList = new ArrayList<>();
 	
@@ -34,12 +32,10 @@ public class CartMapper implements RowMapper<Cart>{
             //cart.addItem(ProductListItemMapper.mapRow(rs, row));
 			productList.add(productListItemMapper.mapRow(rs, row));
             row++;
-        }*/
-		
-		
-		
-		Product product = new Product("NEW_Name", 100.0);
-		productList.add(new ProductListItem(product, 4));
+        }*/		
+				
+		//Product product = new Product("NEW_Name", 100.0);
+		//productList.add(new ProductListItem(product, 4));
 
 		
 		Cart cart = new Cart(client, new Date(), productList);
@@ -53,6 +49,7 @@ public class CartMapper implements RowMapper<Cart>{
 	}
 	
 	
+
 	
 	/*public final static RowMapper<Cart> orderMapper = ParameterizedBeanPropertyRowMapper.newInstance(Cart.class);
 	

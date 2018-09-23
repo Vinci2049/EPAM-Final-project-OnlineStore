@@ -6,19 +6,19 @@
 	<head>
     	<meta charset="utf-8">
     	<title>Корзина</title>
-    	<link rel="stylesheet" href="css/style.css">
-    	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
-    	<script>
-      		$(function(){
-			  $("#menu").load("menu.html");
-			});
-		</script>
+
+		<c:url value="/resources/css/style.css" var="styleCss" />
+		<c:url value="/resources/js/jquery-3.3.1.min.js" var="jqueryJs" />
+
+		<link rel="stylesheet" href="${styleCss}"  />
+   		<script src="${jqueryJs}"></script>
 
 	</head>
 	
 	<body>
 
-		<div id="menu">
+		<div id="menu">  
+			<%@ include file="/WEB-INF/jsp/header.jsp" %>
 		</div>
 
 		<div id="middle">
@@ -29,8 +29,9 @@
 
 				<table id="purchases">
 					<tbody>
-						<tr>
+					
 						<c:forEach var="productIterator" items="${products}">
+						<tr>
 						
 							<td class="image">
 								<a href="product1.html">
@@ -45,15 +46,15 @@
 							</td>
 							<td class="amount">
 								<span class="minus">-</span>
-								<input class="quantity" type="text" value="1"/>
+								<input class="quantity" type="text" value=${productIterator.quantity}>
 								<span class="plus">+</span>
 							</td>
 							<!--td class="remove" id="remove1">
 								<img src="images/delete.png" title="Удалить из корзины" alt="Удалить из корзины">								
 							</td-->
 						
-						</c:forEach>
 						</tr>
+						</c:forEach>
 
 					</tbody>
 
