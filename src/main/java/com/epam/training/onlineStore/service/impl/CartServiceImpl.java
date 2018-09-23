@@ -24,8 +24,14 @@ public class CartServiceImpl implements CartService {
 	
 	
 	@Override
-	public void addProductById(long id) {
-		this.cartDAO.addProductById(id);
+	public void addProductById(long productId) {
+		this.cartDAO.addProductById(productId);
+	}
+
+	@Override
+	public void removeProductById(long productId) {
+		this.cartDAO.removeProductById(productId);
+		
 	}
 	
 }

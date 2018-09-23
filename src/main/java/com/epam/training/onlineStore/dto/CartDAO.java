@@ -10,4 +10,5 @@ public interface CartDAO {
 	
 	int addProductById(long idProduct);
 	
+	int removeProductById(long idProduct);
 }

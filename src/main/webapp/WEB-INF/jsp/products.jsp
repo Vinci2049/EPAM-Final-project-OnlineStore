@@ -50,7 +50,7 @@
 						${productIterator.price} $
 					</span>
 						<!--  >form class="variants" action="/cart/addToCart?ProductId=${productIterator.id}" method="post"-->
-						<form class="variants" action="<c:url value="/cart/addToCart?ProductId=${productIterator.id}"/>" method="post">
+						<form class="variants" action="<c:url value="/cart/addToCart/${productIterator.id}"/>" method="post">
 							<!-- >input type="button" value="Купить" id="prod1" onClick="addToCard(this.id);"-->
 							<!-- >button type="submit" id=${productIterator.id}>Купить</button-->
 							<button type="submit">Добавить</button>

@@ -106,8 +106,17 @@ public class CartDAOImpl implements CartDAO {
 //	          , 1);
 
 	}
-	
-	
+
+	@Override
+	public int removeProductById(long idProduct) {
+		// ВРЕМЕННО
+		int idClient = 1;
+				
+		return this.jdbcTemplate.update("DELETE FROM CartProductList WHERE cart_client_idclient = ? AND product_idProduct = ?"
+        //+ "(?,?)"
+      , idClient
+      , idProduct);
+	}
 	
 	
 	

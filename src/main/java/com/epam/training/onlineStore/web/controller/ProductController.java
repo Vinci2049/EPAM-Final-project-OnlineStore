@@ -6,13 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.epam.training.onlineStore.service.ProductService;
@@ -21,7 +17,6 @@ import com.epam.training.onlineStore.model.Product;
 
 @Controller
 public class ProductController {
-
 	
 	private final ProductService productService;
 	
@@ -52,17 +47,15 @@ public class ProductController {
     }
 	
     
-    
     @RequestMapping("/product/{productId}")
     public ModelAndView product(HttpServletRequest request,
-             @PathVariable(name = "productId", required = false) String productId) {
+             @PathVariable(name = "productId", required = false) Long productId) {
         
     	ModelAndView modelAndView = new ModelAndView();
         
         modelAndView.setViewName("product");
         
-       	long id = Long.parseLong(productId);		// ВРЕМЕННО НЕ НАДО ЛИ В ПАРАМЕТРАХ СТРИНГ НА ЛОНГ?
-        Product product = productService.findById(id);
+        Product product = productService.findById(productId);
 
         modelAndView.addObject("product", product);
 
@@ -114,7 +107,5 @@ public class ProductController {
 
         return "redirect:/index.html";
     }    
-    
-    
-    
+
 }

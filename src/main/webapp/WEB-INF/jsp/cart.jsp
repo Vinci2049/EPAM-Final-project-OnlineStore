@@ -42,16 +42,18 @@
 								<a href="product1.html">${productIterator.product.name}</a>
 							</td>
 							<td class="price">
-								200 $
+								${productIterator.product.price} $
 							</td>
 							<td class="amount">
 								<span class="minus">-</span>
 								<input class="quantity" type="text" value=${productIterator.quantity}>
 								<span class="plus">+</span>
 							</td>
-							<!--td class="remove" id="remove1">
-								<img src="images/delete.png" title="Удалить из корзины" alt="Удалить из корзины">								
-							</td-->
+							<td class="remove" id="remove1">
+								<a href="/cart/remove/${productIterator.product.id}">
+									<img src="images/delete.png" title="Удалить из корзины" alt="Удалить из корзины">
+								</a>								
+							</td>
 						
 						</tr>
 						</c:forEach>
