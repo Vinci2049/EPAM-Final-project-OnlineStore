@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -108,4 +110,40 @@ public class ProductController {
         return "redirect:/index.html";
     }    
 
+    
+    @GetMapping("/newProduct")
+    //public String listproduct(Model model) {
+        public ModelAndView listproduct(Model model) {
+        
+    	ModelAndView modelAndView = new ModelAndView();
+        
+        modelAndView.setViewName("newproduct");
+        
+        //Product product = productService.findById(productId);
+
+        //modelAndView.addObject("product", product);
+
+       //return "newProduct";
+        return modelAndView;
+    }
+ 
+    
+    
+    
+    @PostMapping("product/new")
+//  public ModelAndView addProduct(HttpServletRequest request,
+//          @PathVariable(name = "pageId", required = false) String pageId) {
+      
+  public String newProduct(Model model,
+          Product product) {
+
+   	//Product product2 = new Product("name_name_name", 40.0);	// ВРЕМЕННО УБРАТЬ PAGEID
+   	
+  	productService.add(product);
+
+    return "redirect:/index.html";
+    //return "redirect:/newProduct";
+  }    
+    
+    
 }

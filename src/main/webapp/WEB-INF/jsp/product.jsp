@@ -28,7 +28,8 @@
 			<div class="product">
 				<!-- Большое фото -->
 				<div class="image">
-					<img src="${image}">
+					<!-- >img src="${image}"-->
+					<img src=${product.image}>
 				</div>
 				<!-- Большое фото (The End) -->
 

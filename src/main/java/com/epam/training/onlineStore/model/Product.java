@@ -8,6 +8,15 @@ public class Product extends NamedEntity {
 
 	private double price;
 	private String description;
+
+
+	// ВРЕМЕННО
+	public Product () {
+		this.setName("Temp");
+		this.price = 0.1;
+	}
+	
+	
 	
 	public Product (String name, double price) {
 		this.setName(name);

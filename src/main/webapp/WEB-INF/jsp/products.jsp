@@ -27,6 +27,9 @@
 			<form action="<c:url value="/products/new"/>" method="post">
 				<button type="submit">Добавить</button>
 			</form>
+			
+			<a href="/newProduct">Добавить новый товар</a>
+			
 		
 			<H1>Товары</H1>
 
