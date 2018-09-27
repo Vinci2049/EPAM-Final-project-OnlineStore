@@ -33,17 +33,19 @@
 		            <td><button type="submit">Добавить</button></td>
 		        </tr>
 		    	</table-->
-		                    
-		        <input type="text" name="name"><br />
-		        <input type="number" name="price"> <br />
-		        <input type="text" name="description"> <br />
-	
-				<input type='file' name="image2" onchange="readURL(this);" />
-				<img id="image" src="#" alt="your image" /> <br />
-	
+		        
+		        <table>
+		        	<tr><td>Наименование: </td><td><input type="text" name="name"><td></tr>
+		        	<tr><td>Цена:</td><td><input type="number" name="price"><td></tr>
+		        	<tr><td>Описание:</td><td><input type="text" name="description"></td></tr>
+				</table>
 	            <button type="submit">Добавить</button>
 		
 			</form>
+			
+	</form>	
+			
+			
 		</div>
 		
 		<script type="text/javascript">		
@@ -51,7 +53,7 @@
 				if (input.files && input.files[0]) {
 					var reader = new FileReader();
 					reader.onload = function (e) {
-			 			$('#image')
+			 			$('#image2')
 						.attr('src', e.target.result)
 						.width(150)
 						.height(200);

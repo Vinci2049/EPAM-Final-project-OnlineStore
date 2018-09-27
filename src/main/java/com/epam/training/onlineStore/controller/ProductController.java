@@ -1,4 +1,4 @@
-package com.epam.training.onlineStore.web.controller;
+package com.epam.training.onlineStore.controller;
 
 import java.util.List;
 
@@ -64,53 +64,7 @@ public class ProductController {
         return modelAndView;
     }
 
-    
-    /*@PostMapping("")
-    @ResponseStatus(HttpStatus.CREATED)
-    public String create(@RequestParam(required = false) String id, @RequestBody String note) {
-        if (StringUtils.isEmpty(id)) {
-            id = note.split(" ")[0];
-        }
-        products.put(id, note);
-        return id;
-    }*/    
-    
-    /*@PostMapping("/product/add")
-    //@PostMapping("")
-    @ResponseStatus(HttpStatus.CREATED)
-    //public void createProduct(@RequestBody Product request) {
-    public void createProduct(@RequestBody Product product) {
-
-    	Product product2 = new Product ("NAME2", 20.0);
-    	
-        productService.add(product2);
-    }*/
-
-    
-    //@GetMapping("add_diagnosis")
-    /*@GetMapping("add_product")
-    public String listTreatment(Model model) {
-        List<Product> products = this.productService.getAll();
-        model.addAttribute("treatments", products);
-
-        return "doctor/add_diagnosis";
-    }*/
-
-    @PostMapping("products/new")
-//    public ModelAndView addProduct(HttpServletRequest request,
-//            @PathVariable(name = "pageId", required = false) String pageId) {
         
-    public String addProduct(HttpServletRequest request,
-            @PathVariable(name = "pageId", required = false) String pageId) {
-
-     	Product product = new Product("name_name", 30.0);	// ВРЕМЕННО УБРАТЬ PAGEID
-     	
-    	productService.add(product);
-
-        return "redirect:/index.html";
-    }    
-
-    
     @GetMapping("/newProduct")
     //public String listproduct(Model model) {
         public ModelAndView listproduct(Model model) {
@@ -119,31 +73,22 @@ public class ProductController {
         
         modelAndView.setViewName("newproduct");
         
-        //Product product = productService.findById(productId);
-
-        //modelAndView.addObject("product", product);
-
-       //return "newProduct";
         return modelAndView;
+        
     }
- 
-    
     
     
     @PostMapping("product/new")
 //  public ModelAndView addProduct(HttpServletRequest request,
 //          @PathVariable(name = "pageId", required = false) String pageId) {
       
-  public String newProduct(Model model,
+	public String newProduct(Model model,
           Product product) {
 
-   	//Product product2 = new Product("name_name_name", 40.0);	// ВРЕМЕННО УБРАТЬ PAGEID
-   	
-  	productService.add(product);
+    	productService.add(product);
+  	
+    	return "redirect:/index.html";
 
-    return "redirect:/index.html";
-    //return "redirect:/newProduct";
-  }    
-    
-    
+	}    
+       
 }

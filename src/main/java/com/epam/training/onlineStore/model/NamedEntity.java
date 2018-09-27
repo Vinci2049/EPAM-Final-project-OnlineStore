@@ -4,7 +4,7 @@ package com.epam.training.onlineStore.model;
 public class NamedEntity extends BaseEntity {
 	
 	//@Column(name = "name")
-	private String name;
+	protected String name;
 	
 	public String getName() {
 		return this.name;

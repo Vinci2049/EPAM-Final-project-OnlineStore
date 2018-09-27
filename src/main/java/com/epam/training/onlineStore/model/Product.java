@@ -9,34 +9,30 @@ public class Product extends NamedEntity {
 	private double price;
 	private String description;
 
-
-	// ВРЕМЕННО
 	public Product () {
-		this.setName("Temp");
-		this.price = 0.1;
-	}
+	}	
 	
-	
-	
-	public Product (String name, double price) {
+	public Product (String name, double price, String description) {
+		//this.setId(id);
 		this.setName(name);
-		this.price = price;
+		this.setPrice(price);
+		this.setDescription(description);
 	}
 
-	public Product (int id, String name, double price, String description) {
+	public Product (long id, String name, double price, String description) {
 		this.setId(id);
 		this.setName(name);
 		this.setPrice(price);
 		this.setDescription(description);
 	}
-	
+
+	// ДОБАВИТЬ ID в hashCode и Equals ??
 	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + getId();
-		result = prime * result + ((this.getName() == null) ? 0 : this.getName().hashCode());
+		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		long temp;
 		temp = Double.doubleToLongBits(price);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
@@ -52,17 +48,16 @@ public class Product extends NamedEntity {
 		if (getClass() != obj.getClass())
 			return false;
 		Product other = (Product) obj;
-		if (getId() != other.getId())
-			return false;
-		if (this.getName() == null) {
-			if (other.getName() != null)
+		if (description == null) {
+			if (other.description != null)
 				return false;
-		} else if (!this.getName().equals(other.getName()))
+		} else if (!description.equals(other.description))
 			return false;
 		if (Double.doubleToLongBits(price) != Double.doubleToLongBits(other.price))
 			return false;
 		return true;
 	}
+	
 
 	public double getPrice() {
 		return price;

@@ -1,4 +1,4 @@
-package com.epam.training.onlineStore.web.interceptor;
+package com.epam.training.onlineStore.interceptor;
 
 import java.util.Objects;
 

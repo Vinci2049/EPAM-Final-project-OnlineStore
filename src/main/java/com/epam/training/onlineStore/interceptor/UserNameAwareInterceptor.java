@@ -1,4 +1,4 @@
-package com.epam.training.onlineStore.web.interceptor;
+package com.epam.training.onlineStore.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

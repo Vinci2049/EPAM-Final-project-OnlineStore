@@ -9,7 +9,6 @@
 		<c:url value="/resources/css/style.css" var="styleCss" />
 		<c:url value="/resources/js/jquery-3.3.1.min.js" var="jqueryJs" />
 
-		<!-- ВРЕМЕННО! -->
 		<c:url value="/resources/images/Yeni-Orijinal-Apple-iPhone-7-2-GB-RAM-32-GB-128-GB-ROM-IOS-10-LTE.jpg" var="image" />
 
 		<link rel="stylesheet" href="${styleCss}"  />
@@ -28,8 +27,7 @@
 			<div class="product">
 				<!-- Большое фото -->
 				<div class="image">
-					<!-- >img src="${image}"-->
-					<img src=${product.image}>
+					<img src="${image}">
 				</div>
 				<!-- Большое фото (The End) -->
 
@@ -40,10 +38,11 @@
 					<div class="price">
 						${product.price} $
   					</div>
-					<!-- Цена (The End) -->
-					<form action="/cart">
-						<input type="button" value="Купить" id="prod1" onClick="addToCard(this.id);">
+						
+					<form class="variants" action="<c:url value="/cart/addToCart/${product.id}"/>" method="post">
+						<button type="submit">Купить</button>
 					</form>
+					
 				</div>
 				<!-- Описание товара (The End) -->
 			</div>

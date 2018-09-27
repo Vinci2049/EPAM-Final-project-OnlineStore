@@ -1,4 +1,4 @@
-package com.epam.training.onlineStore.web.controller;
+package com.epam.training.onlineStore.controller;
 
 import java.util.List;
 

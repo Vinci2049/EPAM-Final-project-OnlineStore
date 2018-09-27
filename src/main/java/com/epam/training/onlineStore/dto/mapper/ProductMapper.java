@@ -17,6 +17,7 @@ public class ProductMapper implements RowMapper<Product>{
 				rs.getString("name"),
 				rs.getDouble("price"),
 				rs.getString("description"));
+				
 		return product;
 	}
 	

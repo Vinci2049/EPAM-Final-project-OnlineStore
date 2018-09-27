@@ -10,6 +10,9 @@
 		<c:url value="/resources/css/style.css" var="styleCss" />
 		<c:url value="/resources/js/jquery-3.3.1.min.js" var="jqueryJs" />
 
+		<c:url value="/resources/images/Yeni-Orijinal-Apple-iPhone-7-2-GB-RAM-32-GB-128-GB-ROM-IOS-10-LTE_50.jpg" var="image" />
+		<c:url value="/resources/images/delete.png" var="delete" />
+
 		<link rel="stylesheet" href="${styleCss}"  />
    		<script src="${jqueryJs}"></script>
 
@@ -35,7 +38,7 @@
 						
 							<td class="image">
 								<a href="product1.html">
-									<img src="images/Yeni-Orijinal-Apple-iPhone-7-2-GB-RAM-32-GB-128-GB-ROM-IOS-10-LTE_50.jpg">
+									<img src="${image}">
 								</a>
 							</td>
 							<td class="name">
@@ -51,7 +54,7 @@
 							</td>
 							<td class="remove" id="remove1">
 								<a href="/cart/remove/${productIterator.product.id}">
-									<img src="images/delete.png" title="Удалить из корзины" alt="Удалить из корзины">
+									<img src="${delete}" title="Удалить из корзины" alt="Удалить из корзины">
 								</a>								
 							</td>
 						
