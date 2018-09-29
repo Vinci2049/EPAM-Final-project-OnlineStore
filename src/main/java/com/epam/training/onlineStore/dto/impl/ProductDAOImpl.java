@@ -39,7 +39,28 @@ public class ProductDAOImpl implements ProductDAO {
                 , product.getName()
               	, product.getPrice()
 				, product.getDescription());
-	}
+	}	
 	
+	@Override
+	public long edit(Product product) {
+
+		return this.jdbcTemplate.update("UPDATE PRODUCT SET name = ?, price = ?, description = ? WHERE id = 2"
+                , product.getName()
+              	, product.getPrice()
+				, product.getDescription());
+				//, product.getId());
+		
+		
+//		return getJdbcTemplate().update(
+//                "UPDATE "
+//                        + getTable()
+//                        + " SET title = ?, idAuthor = ?, idGenre = ?"
+//                        + getWhereId()
+//                , entity.getTitle()
+//                , entity.getAuthor().getId()
+//                , entity.getGenre().getId()
+//                , id);
+	}	
+
 	
 }

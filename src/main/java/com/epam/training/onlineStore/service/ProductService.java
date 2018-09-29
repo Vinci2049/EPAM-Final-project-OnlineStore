@@ -6,5 +6,6 @@ public interface ProductService extends BaseEntityService<Product>{
 
 	long add(Product product);
 
+	long edit(Product product);
 	
 }

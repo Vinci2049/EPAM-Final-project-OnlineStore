@@ -31,6 +31,12 @@ public class OrderDAOImpl implements OrderDAO {
 		return this.jdbcTemplate.queryForObject("SELECT * FROM orders WHERE id = ?",
                 new Object[]{id}, new OrderMapper());
 	}
+
+	@Override
+	public long add(Order t) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 
 	/*public final static RowMapper<Order> orderMapper = BeanPropertyRowMapper.newInstance(Order.class);

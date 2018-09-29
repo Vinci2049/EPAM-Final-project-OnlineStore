@@ -1,21 +1,15 @@
 package com.epam.training.onlineStore.dto.impl;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.epam.training.onlineStore.dto.CartDAO;
 import com.epam.training.onlineStore.dto.mapper.CartMapper;
 import com.epam.training.onlineStore.dto.mapper.ProductListItemMapper;
-import com.epam.training.onlineStore.dto.mapper.ProductMapper;
 import com.epam.training.onlineStore.model.Cart;
-import com.epam.training.onlineStore.model.Product;
 import com.epam.training.onlineStore.model.ProductListItem;
 
 @Repository

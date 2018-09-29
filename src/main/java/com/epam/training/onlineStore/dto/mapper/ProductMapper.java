@@ -13,7 +13,7 @@ public class ProductMapper implements RowMapper<Product>{
 	public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
 		
 		Product product = new Product(
-				rs.getInt("id"),
+				rs.getLong("id"),
 				rs.getString("name"),
 				rs.getDouble("price"),
 				rs.getString("description"));

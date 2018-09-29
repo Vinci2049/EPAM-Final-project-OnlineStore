@@ -7,44 +7,34 @@ public class User extends NamedEntity {
 
     @NotEmpty(message="Логин должен быть заполнен")
     @Size(min = 3, message="Логин должен быть длиннее 3")
-    private long id;
     private String login;
     private String password;
-    private String name;
-    private String surname;
     private String email;
-    private Permissions role;
+    private boolean isAdmin;
+    private boolean inBlackList;
 
-    /*public User(int id, String name, String surname) {
-    	this.setId(id);
-    	this.setName(name);
-    	this.setSurname(surname);
-        //super();
-        // TODO Auto-generated constructor stub
-    }*/
-        
+
 	public User() {
 	
 	}
     
     public User(
 			@NotEmpty(message = "Логин должен быть заполнен") @Size(min = 3, message = "Логин должен быть длиннее 3") long id,
-			String login, String password, String name, String surname, String email, Permissions role) {
-		super();
+			String login, String password, String name, String email, boolean inBlackList, boolean isAdmin) {
 		this.id = id;
 		this.login = login;
 		this.password = password;
 		this.name = name;
-		this.surname = surname;
 		this.email = email;
-		this.role = role;
+		this.inBlackList = inBlackList;
+		this.isAdmin = isAdmin;
 	}
 
 
-	public User(String login) {
+	/*public User(String login) {
         super();
         this.login = login;
-    }
+    }*/
 
     public String getLogin() {
         return login;
@@ -62,12 +52,12 @@ public class User extends NamedEntity {
         this.password = password;
     }
 
-    public Permissions getRole() {
-        return role;
+    public boolean getIsAdmin() {
+        return isAdmin;
     }
 
-    public void setRole(Permissions role) {
-        this.role = role;
+    public void setIsAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
     }
 
     public String getName() {
@@ -78,20 +68,12 @@ public class User extends NamedEntity {
         this.name = name;
     }
 
-    public String getSurname() {
-        return surname;
+    public boolean getInBlackList() {
+        return inBlackList;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
+    public void setInBlackList(boolean inBlackList) {
+        this.inBlackList = inBlackList;
     }
 
     public String getEmail() {

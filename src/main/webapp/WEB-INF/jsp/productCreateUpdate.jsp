@@ -9,7 +9,6 @@
 		<c:url value="/resources/css/style.css" var="styleCss" />
 		<c:url value="/resources/js/jquery-3.3.1.min.js" var="jqueryJs" />
 
-
 		<link rel="stylesheet" href="${styleCss}"  />
    		<script src="${jqueryJs}"></script>
 			
@@ -23,7 +22,7 @@
 
 		<div id="middle">
 		
-			<form action="<c:url value="/product/new"/>" method="post">
+			<form action="<c:url value="/product/${product.id}/edit"/>" method="post"-->
 				<!-- form:form modelAttribute="product"-->
 				
 				<!-- >table>
@@ -35,33 +34,16 @@
 		    	</table-->
 		        
 		        <table>
-		        	<tr><td>Наименование: </td><td><input type="text" name="name"><td></tr>
-		        	<tr><td>Цена:</td><td><input type="number" name="price"><td></tr>
-		        	<tr><td>Описание:</td><td><input type="text" name="description"></td></tr>
+		        	<tr><td>Наименование: </td><td><input value="${product.name}" type="text" name="name"><td></tr>
+ 		        	<tr><td>Цена:</td><td><input value="${product.price}" type="number" name="price"><td></tr>
+		        	<tr><td>Описание:</td><td><input value="${product.description}" type="text" name="description"></td></tr>
 				</table>
-	            <button type="submit">Добавить</button>
+	            <button type="submit">Записать</button>
 		
 			</form>
 			
-	</form>	
-			
-			
 		</div>
-		
-		<script type="text/javascript">		
-			function readURL(input) {
-				if (input.files && input.files[0]) {
-					var reader = new FileReader();
-					reader.onload = function (e) {
-			 			$('#image2')
-						.attr('src', e.target.result)
-						.width(150)
-						.height(200);
-					};
-					reader.readAsDataURL(input.files[0]);
-				}
-}
-		</script>
-		
+			
 	</body>
+	
 </html>

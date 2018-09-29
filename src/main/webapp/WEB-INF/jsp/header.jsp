@@ -3,9 +3,26 @@
 
 <ul id="menu">
     <li><a href="/index.html">Товары</a></li>
-    <li><a href="/login.html">Авторизация</a></li>
-    <li><a href="/registration.html">Регистрация</a></li>
+
+    <c:if test="${currentUser == 'Не определен' || currentUser == null}">
+	    <li><a href="/login">Авторизация</a></li>
+	</c:if>
+	   
+    <c:if test="${currentUser != null}">
+    	<li><a href="/logout">Выход</a></li>
+    </c:if>
+    
+    <li><a href="/registration">Регистрация</a></li>
+    
+    <c:if test="${currentUserIsAdmin}">
+	    <li><a href="/users">Пользователи</a></li>    
+    </c:if>
+    
 </ul>
+
+Пользователь: ${currentUserName}
+Это админ: ${currentUserIsAdmin}
+
 
 <div id="cart_informer">
 	<a href="/cart">Корзина</a>

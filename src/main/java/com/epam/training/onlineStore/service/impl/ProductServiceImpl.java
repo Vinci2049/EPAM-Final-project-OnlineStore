@@ -34,4 +34,9 @@ public class ProductServiceImpl implements ProductService {
 		return this.productDAO.add(product);
 	}
 
+	@Override
+	public long edit(Product product) {
+		return this.productDAO.edit(product);
+	}
+
 }

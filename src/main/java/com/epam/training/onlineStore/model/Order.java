@@ -9,12 +9,10 @@ import java.util.List;
 //@Entity
 //@Table(name = "products")
 public class Order extends BaseEntity {
-
-	enum Status {registered, paid};
 	
-	private Status status;
-	private Client client;
+	private User client;
 	private Date date;
+	private boolean isPaid;
 
 	//private List<Product> productList;
 	private List<ProductListItem> productList;
@@ -22,7 +20,7 @@ public class Order extends BaseEntity {
 	private List<Order> orderList;
 	
 	
-	public void printOrder(Order order) {
+	/*public void printOrder(Order order) {
 		System.out.println();
 		System.out.println("Заказ клиента № "+order.getId()+" от "+order.getDate());
 		System.out.println("Клиент: "+order.getClient().getId()+" - "+order.getClient().getName()+" "+order.getClient().getSurname());
@@ -30,13 +28,13 @@ public class Order extends BaseEntity {
 		//for (Product currentProduct : order.getProductList()) {
 		//	System.out.println(currentProduct.getName());
 		//}
-	}
+	}*/
 
-	public Client getClient() {
+	public User getClient() {
 		return client;
 	}
 
-	public void setClient(Client client) {
+	public void setClient(User client) {
 		this.client = client;
 	}
 
@@ -64,11 +62,11 @@ public class Order extends BaseEntity {
 		this.productList = productList;
 	}
 
-	public Order(int id, Date date, Status status, Client client, List<ProductListItem> productList) {
+	public Order(User client, Date date, List<ProductListItem> productList, boolean isPaid) {
 		this.client = client;
 		this.date = date;
-		this.status = status;
 		this.productList = productList;
+		this.isPaid = isPaid;
 	}
 
 	public void addItem(Product product, float quantity) {
@@ -78,6 +76,14 @@ public class Order extends BaseEntity {
 		
 	public void addItem(ProductListItem productListItem) {
 		this.productList.add(productListItem);
+	}
+
+	public boolean isPaid() {
+		return isPaid;
+	}
+
+	public void setPaid(boolean isPaid) {
+		this.isPaid = isPaid;
 	}
 
 }

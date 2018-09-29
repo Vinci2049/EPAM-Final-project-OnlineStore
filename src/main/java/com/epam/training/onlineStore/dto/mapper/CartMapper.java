@@ -9,41 +9,20 @@ import java.util.List;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.epam.training.onlineStore.model.Cart;
-import com.epam.training.onlineStore.model.Client;
-import com.epam.training.onlineStore.model.Product;
 import com.epam.training.onlineStore.model.ProductListItem;
+import com.epam.training.onlineStore.model.User;
 
 public class CartMapper implements RowMapper<Cart>{
 
 	@Override
 	public Cart mapRow(ResultSet rs, int rowNum) throws SQLException {
 		
-		Client client = new Client(1, "Name", "Surname");		
+		//User client = new User(1, "Name", "Surname");		
+		User client = new User();		
 		
 		List<ProductListItem> productList = new ArrayList<>();
-	
-		/*ProductListItemMapper productListItemMapper = new ProductListItemMapper();
-		
-		int row = 0;
-		while (rs.next()) {
-        	//if (cart == null) {
-            //	cart = cartMapper.mapRow(rs, row);
-            //}
-            //cart.addItem(ProductListItemMapper.mapRow(rs, row));
-			productList.add(productListItemMapper.mapRow(rs, row));
-            row++;
-        }*/		
-				
-		//Product product = new Product("NEW_Name", 100.0);
-		//productList.add(new ProductListItem(product, 4));
-
-		
+			
 		Cart cart = new Cart(client, new Date(), productList);
-		
-		/*Cart cart = new Cart(
-				client,
-				rs.getDate("date"),
-				productList);*/
 		
 		return cart;
 	}

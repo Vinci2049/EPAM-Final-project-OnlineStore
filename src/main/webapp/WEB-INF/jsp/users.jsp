@@ -8,7 +8,6 @@
 		<c:url value="/resources/css/style.css" var="styleCss" />
 		<c:url value="/resources/js/jquery-3.3.1.min.js" var="jqueryJs" />
 
-		<c:url value="/resources/images/Yeni-Orijinal-Apple-iPhone-7-2-GB-RAM-32-GB-128-GB-ROM-IOS-10-LTE.jpg" var="image" />
 		<c:url value="/resources/images/pencil.png" var="edit" />
 		<c:url value="/resources/images/delete.png" var="delete" />
 
@@ -33,37 +32,32 @@
 
     		<!-- Товары -->
     		<ul class="tiny_products">
-    		<c:forEach var="productIterator" items="${products}">
+    		<c:forEach var="userIterator" items="${users}">
 				<!-- Товар -->
 				<li class="product">
 
 					<!-- Кнопки админа -->			
 					<c:if test="${currentUserIsAdmin}">
-						<a href="/product/${productIterator.id}/edit">
-							<img src="${edit}" title="Редактировать товар" alt="Редактировать товар">
+						<a href="/product/edit/${userIterator.id}">
+							<img src="${edit}" title="Редактировать пользователя" alt="Редактировать пользователя">
 						</a>
-						<a href="/product/remove/${productIterator.id}">
-							<img src="${delete}" title="Удалить товар" alt="Удалить товар">
+						<a href="/product/remove/${userIterator.id}">
+							<img src="${delete}" title="Удалить пользователя" alt="Удалить пользователя">
 						</a>			
 					</c:if>
 					<!-- Кнопки админа (The End) -->
 				
-					<!-- Фото товара -->
-					<div class="image">
-						<img src="${image}">
-					</div>
-					<!-- Фото товара (The End) -->
 					<!-- Название товара -->
 					<h3>
-						<a href="/product/${productIterator.id}">${productIterator.name}</a>
+						<a href="/product/${userIterator.id}">${userIterator.login}${userIterator.name}</a>
 					</h3>
 					<!-- Название товара (The End) -->
 					<!-- Цена -->
 					<span class="price">
-						${productIterator.price} $
+						<!--${productIterator.price} $-->
 					</span>
 
-						<form class="variants" action="<c:url value="/cart/addToCart/${productIterator.id}"/>" method="post">
+						<form class="variants" action="<c:url value="/cart/addToCart/${userIterator.id}"/>" method="post">
 							<button type="submit">Купить</button>
 						</form>
  

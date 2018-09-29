@@ -6,14 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.epam.training.onlineStore.model.User;
-import com.epam.training.onlineStore.exception.NotFoundException;
 import com.epam.training.onlineStore.service.UserManager;
+import com.epam.training.onlineStore.service.UserService;
 
 @Controller
 public class AuthController {
@@ -21,58 +21,54 @@ public class AuthController {
     @Autowired
     private UserManager userManager;
 
+    @Autowired
+    private UserService userService;    
+    
     @GetMapping("/login")
     public ModelAndView getLoginPage() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("login-page");
+        modelAndView.setViewName("login");
+        User user = userManager.getUser();
+        if (user != null) {
+            modelAndView.setViewName("redirect:/index.html"); 
+        }
+        return modelAndView;
 
+    }
+    
+   
+    @PostMapping("/login")
+    public ModelAndView loginCheck(
+    	@ModelAttribute(value = "login") String login,
+    	@ModelAttribute(value = "password") String password) {
+    	
+        ModelAndView modelAndView = new ModelAndView();
+        User user = userService.checkLoginAndPasswordAndGetUser(login, password);
+        if (user != null) {
+            userManager.setUser(user);
+            modelAndView.setViewName("redirect:/login");
+        } else {
+            modelAndView.addObject("result", "Ошибка!");
+        }
         return modelAndView;
     }
 
     @GetMapping("/logout")
     public ModelAndView logout(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("login-page");
+        modelAndView.setViewName("login");
 
         request.getSession().invalidate();
 
         return modelAndView;
     }
-
-    @PostMapping("/login")
-    public ModelAndView login(User user) {
-        ModelAndView modelAndView = new ModelAndView();
-        
-        if (user.getLogin().equals("hacker")) {
-            throw new NotFoundException("Хакер уходи");
-        }
-
-        if (!user.getPassword().equals("123")) {
-            modelAndView.addObject("errorMsg", "Пароль неверен");
-            modelAndView.setViewName("login-page");
-        } else {
-            User currentUser = new User();
-            currentUser.setLogin(user.getLogin());
-
-            
-            if (user.getLogin().equals("Admin")) {
-                currentUser.setRole("ADMIN");
-            } else {
-                currentUser.setRole("USER");
-            }
-
-            userManager.setUser(currentUser);
-
-            modelAndView.setViewName("redirect:/home");
-        }
-
-        return modelAndView;
-
-    }
-
+    
+    
     @GetMapping("/registration")
-    public ModelAndView registrationPage(User user) {
-        ModelAndView modelAndView = new ModelAndView();
+    //public ModelAndView registrationPage(User user) {
+    public ModelAndView registrationPage() {
+        
+    	ModelAndView modelAndView = new ModelAndView();
 
         modelAndView.setViewName("registration");
 
@@ -81,14 +77,25 @@ public class AuthController {
     }
 
     @PostMapping("/registration")
+    
     public ModelAndView registration(@Validated User user, BindingResult result) {
-        ModelAndView modelAndView = new ModelAndView();
+    
+    	ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("registration");
 
         if (result.hasErrors()) {
             modelAndView.addObject("errors", result.getAllErrors());
         }
-
+        
+        if (result.hasErrors()) {
+            modelAndView.addObject("result", "Исправьте ошибки");
+        } else if (!userService.checkAndAddUser(user)) {
+            modelAndView.addObject("result", "Логин занят");
+        } else {
+            modelAndView.addObject("result", "Регистрация успешна");
+        }
         return modelAndView;
+
     }
 
 //    @ExceptionHandler(NotFoundException.class)

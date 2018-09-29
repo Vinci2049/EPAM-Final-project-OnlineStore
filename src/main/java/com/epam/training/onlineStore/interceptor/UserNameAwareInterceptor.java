@@ -16,12 +16,61 @@ public class UserNameAwareInterceptor implements HandlerInterceptor {
     private UserManager userManager;
 
     @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-            ModelAndView modelAndView) throws Exception {
-        User currentUser = userManager.getUser();
+   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+           throws Exception {
+       
+   	User currentUser = userManager.getUser();
 
-//        modelAndView.addObject("userName", currentUser.getLogin());
-//        modelAndView.addObject("currentUserRole", currentUser.getRole());
+       /*if (Objects.isNull(currentUser)) {
+           response.sendRedirect("/login");
+           return false;
+       }*/
+   	
+           if (currentUser == null) {
+           	String currentUserName = "Не определен";
+           	boolean currentUserIsAdmin = false;
+           	
+           } else {
+           	String currentUserName = "Определен";
+           	boolean currentUserIsAdmin = true;
+//           	modelAndView.addObject("currentUserName", currentUser.getLogin());
+//           	modelAndView.addObject("currentUserIsAdmin", currentUser.getIsAdmin());
+           
+       }
+
+       return true;
+
+   }    
+    
+    @Override
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+                           ModelAndView modelAndView) {
+        User currentUser = userManager.getUser();
+        
+        if (modelAndView != null) {
+            modelAndView.addObject("currentUser", currentUser);
+            
+            if (currentUser == null) {
+            	modelAndView.addObject("currentUserName", "Не определен");
+            	modelAndView.addObject("currentUserIsAdmin", false);
+            	
+            } else {
+            	modelAndView.addObject("currentUserName", "Определен");
+            	modelAndView.addObject("currentUserIsAdmin", "Да");
+//            	modelAndView.addObject("currentUserName", currentUser.getLogin());
+//            	modelAndView.addObject("currentUserIsAdmin", currentUser.getIsAdmin());
+            } 	
+            
+        }
+        
+//        if (currentUser == null) {
+//        	modelAndView.addObject("currentUserName", "Не определен");
+//        	modelAndView.addObject("currentUserIsAdmin", false);
+//        	
+//        } else {
+//        	modelAndView.addObject("currentUserName", currentUser.getLogin());
+//        	modelAndView.addObject("currentUserIsAdmin", currentUser.getIsAdmin());
+//        } 	
     }
 
 }
