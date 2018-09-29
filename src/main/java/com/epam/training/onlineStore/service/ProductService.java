@@ -8,4 +8,6 @@ public interface ProductService extends BaseEntityService<Product>{
 
 	long edit(Product product);
 	
+	long deleteById(long id);
+	
 }

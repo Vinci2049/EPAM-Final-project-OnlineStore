@@ -28,7 +28,7 @@
 			<H1>Товары</H1>
 
 			<c:if test="${currentUserIsAdmin}">
-				<a href="/newProduct">Добавить новый товар</a>			
+				<a href="/products/new">Добавить новый товар</a>			
 			</c:if>
 
     		<!-- Товары -->
@@ -39,10 +39,11 @@
 
 					<!-- Кнопки админа -->			
 					<c:if test="${currentUserIsAdmin}">
-						<a href="/product/${productIterator.id}/edit">
+						<a href="/products/${productIterator.id}/edit">
 							<img src="${edit}" title="Редактировать товар" alt="Редактировать товар">
 						</a>
-						<a href="/product/remove/${productIterator.id}">
+						
+						<a href="/products/${productIterator.id}/delete">
 							<img src="${delete}" title="Удалить товар" alt="Удалить товар">
 						</a>			
 					</c:if>

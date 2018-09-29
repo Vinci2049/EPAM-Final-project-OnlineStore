@@ -22,7 +22,15 @@
 
 		<div id="middle">
 		
-			<form action="<c:url value="/product/${product.id}/edit"/>" method="post"-->
+			<H1>
+				<!-- th:block th:if="${pet['new']}">New </th:block-->
+				<c:if test="${product['new']}">New</c:if>
+				Товар
+	    	</H1>
+		
+			<!--form action="<c:url value="/product/${product.id}/edit"/>" method="post"-->
+			<!-- >form action="<c:url value="/product/${product.id}/edit"/>" method="post"-->
+			<form method="post">
 				<!-- form:form modelAttribute="product"-->
 				
 				<!-- >table>
@@ -34,11 +42,16 @@
 		    	</table-->
 		        
 		        <table>
+		        	<tr><td>id: </td><td><input value="${product.id}" type="text" name="id"><td></tr>
 		        	<tr><td>Наименование: </td><td><input value="${product.name}" type="text" name="name"><td></tr>
  		        	<tr><td>Цена:</td><td><input value="${product.price}" type="number" name="price"><td></tr>
 		        	<tr><td>Описание:</td><td><input value="${product.description}" type="text" name="description"></td></tr>
 				</table>
 	            <button type="submit">Записать</button>
+	            <!--button
+          th:with="text=${pet['new']} ? 'Add Pet' : 'Update Pet'"
+          class="btn btn-default" type="submit" th:text="${text}">Add
+          Pet</button-->
 		
 			</form>
 			

@@ -39,4 +39,9 @@ public class ProductServiceImpl implements ProductService {
 		return this.productDAO.edit(product);
 	}
 
+	@Override
+	public long deleteById(long id) {
+		return this.productDAO.deleteById(id);
+	}
+	
 }

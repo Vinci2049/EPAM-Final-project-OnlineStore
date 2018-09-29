@@ -44,11 +44,11 @@ public class ProductDAOImpl implements ProductDAO {
 	@Override
 	public long edit(Product product) {
 
-		return this.jdbcTemplate.update("UPDATE PRODUCT SET name = ?, price = ?, description = ? WHERE id = 2"
+		return this.jdbcTemplate.update("UPDATE PRODUCT SET name = ?, price = ?, description = ? WHERE id = ?"
                 , product.getName()
               	, product.getPrice()
-				, product.getDescription());
-				//, product.getId());
+				, product.getDescription()
+				, product.getId());
 		
 		
 //		return getJdbcTemplate().update(
@@ -62,5 +62,11 @@ public class ProductDAOImpl implements ProductDAO {
 //                , id);
 	}	
 
+	@Override
+	public long deleteById(long id) {
+
+		return this.jdbcTemplate.update("DELETE FROM PRODUCT WHERE id = ?"
+                , id);
+	}	
 	
 }

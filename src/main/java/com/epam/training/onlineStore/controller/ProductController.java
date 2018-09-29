@@ -7,8 +7,8 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,9 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.epam.training.onlineStore.service.ProductService;
-import com.epam.training.onlineStore.service.UserManager;
 import com.epam.training.onlineStore.model.Product;
-import com.epam.training.onlineStore.model.User;
 
 @Controller
 public class ProductController {
@@ -70,30 +68,60 @@ public class ProductController {
     }
 
         
-    @GetMapping("/newProduct")
-    //public String listproduct(Model model) {
-        public ModelAndView listproduct(Model model) {
-        
-    	ModelAndView modelAndView = new ModelAndView();
-        
-        modelAndView.setViewName("productnew");
-        
-        return modelAndView;
-        
-    }   
+//    @GetMapping("/newProduct")
+//    //public String listproduct(Model model) {
+//        public ModelAndView listproduct(Model model) {
+//        
+//    	ModelAndView modelAndView = new ModelAndView();
+//        
+//        modelAndView.setViewName("productnew");
+//        
+//        return modelAndView;
+//        
+//    }
     
-    @PostMapping("product/new")
-//  public ModelAndView addProduct(HttpServletRequest request,
-//          @PathVariable(name = "pageId", required = false) String pageId) {      
-	public String newProduct(Model model,
-          Product product) {
-
-    	productService.add(product);
-  	
-    	return "redirect:/index.html";
-
-	}    
+    @GetMapping("/products/new")
+    public String initCreationForm(ModelMap model) {
+        Product product = new Product();
+        //owner.addPet(pet);
+        model.put("product", product);
+        //return VIEWS_PETS_CREATE_OR_UPDATE_FORM;
+        return "productCreateUpdate";
+    }
+    
+    
+    
+//    @PostMapping("product/new")
+////  public ModelAndView addProduct(HttpServletRequest request,
+////          @PathVariable(name = "pageId", required = false) String pageId) {      
+//	public String newProduct(Model model,
+//          Product product) {
+//
+//    	productService.add(product);
+//  	
+//    	return "redirect:/index.html";
+//
+//	}    
    
+    @PostMapping("/products/new")
+    public String processCreationForm(@Valid Product product, BindingResult result, ModelMap model) {
+        if (StringUtils.hasLength(product.getName()) && product.isNew()){
+            result.rejectValue("name", "duplicate", "already exists");
+        }
+        //owner.addPet(pet);
+        if (result.hasErrors()) {
+            model.put("product", product);
+            //return VIEWS_PETS_CREATE_OR_UPDATE_FORM;
+            return "productCreateUpdate";
+        } else {
+            //this.products.save(product);
+        	productService.add(product);
+            //return "redirect:/owners/{ownerId}";
+        	return "redirect:/index.html";
+        }
+    }    
+    
+    
 //    @GetMapping("/productEdit")
 //    //public String listproduct(Model model) {
 //        public ModelAndView listproductEdit(Model model) {
@@ -106,7 +134,7 @@ public class ProductController {
 //        
 //    }
     
-    @GetMapping("/product/{productId}/edit")
+    @GetMapping("/products/{productId}/edit")
     public String initUpdateForm(@PathVariable("productId") long productId, ModelMap model) {
         Product product = productService.findById(productId);
         model.put("product", product);
@@ -128,7 +156,7 @@ public class ProductController {
 //
 //	}
     
-    @PostMapping("/product/{productId}/edit")
+    @PostMapping("/products/{productId}/edit")
     public String processUpdateForm(@Valid Product product, BindingResult result, ModelMap model) {
         if (result.hasErrors()) {
             //pet.setOwner(owner);
@@ -143,5 +171,31 @@ public class ProductController {
         	return "redirect:/index.html";
         }
     }
+    
+    /*@PostMapping("/products/{productId}/del")
+    public ModelAndView delGenre(@ModelAttribute(value = "id") long id) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName(REDIRECT_ADMIN_GENRES);
+
+        if (bookService.isGenreUsed(id)) {
+            modelAndView.addObject(ERROR, "Ошибка! Есть книга с таким жанром. Сначала удалите данную книгу");
+        } else {
+            genreService.deleteGenre(id);
+            modelAndView.addObject(ALL_OK, "Жанр успешно удален");
+        }
+        return modelAndView;
+    }*/
+    
+    
+	@RequestMapping("/products/{productId}/delete")
+    public String removeFromCart(HttpServletRequest request,
+         @PathVariable(name = "productId", required = false) Long productId) {
+    	
+	  	productService.deleteById(productId);
+
+    	return "redirect:/index.html";
+
+	}
+    
     
 }
