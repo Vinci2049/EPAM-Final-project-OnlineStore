@@ -116,6 +116,16 @@ e[type="button"] {
 }*/
 
 
+#user_informer{
+	background-color: #fff;
+	padding: 5px 13px 6px 13px;
+	border-radius: 15px;
+	float: right;
+	margin-top: 6px;
+	margin-left: 10px;
+	color: #505050;
+}
+
 #cart_informer{
 	background-color: #fff;
 	padding: 5px 13px 6px 13px;

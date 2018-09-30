@@ -25,31 +25,6 @@ public class CartController {
 	}
 	
 	
-    /*@RequestMapping("/**")
-    public ModelAndView CartProductCount(HttpServletRequest request) {
-        ModelAndView modelAndView = new ModelAndView();
-        
-        //Map<Product, Integer> productList = cartService.getAll(idClient);
-        
-        //Cart cart = cartService.findById(1);
-        
-        //List<ProductListItem> products = cart.getProductList();     
-        
-        modelAndView.setViewName("header");
-
-        //User currentUser = userManager.getUser();
-
-        //modelAndView.addObject("client", client);
-        //modelAndView.addObject("productList", productList);
- 
-        modelAndView.addObject("cartProductCount", "5");
-
-        //return "5";
-        return modelAndView;
-    }*/
-
-	
-	
     @RequestMapping("/cart")
     public ModelAndView hello(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();

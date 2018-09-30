@@ -37,6 +37,18 @@ public class OrderDAOImpl implements OrderDAO {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	@Override
+	public long edit(Order order) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public long deleteById(long id) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 
 	/*public final static RowMapper<Order> orderMapper = BeanPropertyRowMapper.newInstance(Order.class);

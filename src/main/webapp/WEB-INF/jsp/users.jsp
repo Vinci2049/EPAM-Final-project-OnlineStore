@@ -24,10 +24,10 @@
 
 		<div id="middle">
 		
-			<H1>Товары</H1>
+			<H1>Пользователи</H1>
 
 			<c:if test="${currentUserIsAdmin}">
-				<a href="/newProduct">Добавить новый товар</a>			
+				<a href="/newuser">Добавить нового пользователя</a>			
 			</c:if>
 
     		<!-- Товары -->
@@ -38,10 +38,10 @@
 
 					<!-- Кнопки админа -->			
 					<c:if test="${currentUserIsAdmin}">
-						<a href="/product/edit/${userIterator.id}">
+						<a href="/users/${userIterator.id}/edit">
 							<img src="${edit}" title="Редактировать пользователя" alt="Редактировать пользователя">
 						</a>
-						<a href="/product/remove/${userIterator.id}">
+						<a href="/users/${userIterator.id}/delete">
 							<img src="${delete}" title="Удалить пользователя" alt="Удалить пользователя">
 						</a>			
 					</c:if>
@@ -49,17 +49,13 @@
 				
 					<!-- Название товара -->
 					<h3>
-						<a href="/product/${userIterator.id}">${userIterator.login}${userIterator.name}</a>
+						<a href="/user/${userIterator.id}">${userIterator.login}${userIterator.name}</a>
 					</h3>
 					<!-- Название товара (The End) -->
 					<!-- Цена -->
 					<span class="price">
 						<!--${productIterator.price} $-->
 					</span>
-
-						<form class="variants" action="<c:url value="/cart/addToCart/${userIterator.id}"/>" method="post">
-							<button type="submit">Купить</button>
-						</form>
  
 				</li>
 				<!-- Товар (The End) -->

@@ -50,16 +50,6 @@ public class ProductDAOImpl implements ProductDAO {
 				, product.getDescription()
 				, product.getId());
 		
-		
-//		return getJdbcTemplate().update(
-//                "UPDATE "
-//                        + getTable()
-//                        + " SET title = ?, idAuthor = ?, idGenre = ?"
-//                        + getWhereId()
-//                , entity.getTitle()
-//                , entity.getAuthor().getId()
-//                , entity.getGenre().getId()
-//                , id);
 	}	
 
 	@Override

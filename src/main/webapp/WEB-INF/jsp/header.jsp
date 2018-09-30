@@ -17,12 +17,17 @@
     <c:if test="${currentUserIsAdmin}">
 	    <li><a href="/users">Пользователи</a></li>    
     </c:if>
+
+    <!-- >c:if test="${currentUserIsAdmin}"-->
+	    <li><a href="/orders">Заказы</a></li>    
+    <!-- >/c:if-->
     
 </ul>
 
-Пользователь: ${currentUserName}
-Это админ: ${currentUserIsAdmin}
-
+<div id="user_informer">
+	Пользователь: ${currentUserName}
+	Это админ: ${currentUserIsAdmin}
+</div>
 
 <div id="cart_informer">
 	<a href="/cart">Корзина</a>

@@ -65,8 +65,14 @@
 
 				</table>
 
-
 			</form>
+			
+						
+			<form action="<c:url value="/orders/new"/>" method="post">
+				<button type="submit">Оформить заказ</button>
+			</form>
+			
+			
 		</div>
 
 			<script>

@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
- 		<title>Интернет-магазин</title>
+ 		<title>Товары</title>
 		
 		<c:url value="/resources/css/style.css" var="styleCss" />
 		<c:url value="/resources/js/jquery-3.3.1.min.js" var="jqueryJs" />

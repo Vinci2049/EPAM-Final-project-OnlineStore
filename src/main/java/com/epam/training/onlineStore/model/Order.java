@@ -62,6 +62,10 @@ public class Order extends BaseEntity {
 		this.productList = productList;
 	}
 
+	public Order() {
+		
+	}
+	
 	public Order(User client, Date date, List<ProductListItem> productList, boolean isPaid) {
 		this.client = client;
 		this.date = date;

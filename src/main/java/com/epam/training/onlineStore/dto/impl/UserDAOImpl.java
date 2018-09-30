@@ -55,4 +55,27 @@ public class UserDAOImpl implements UserDAO {
 				, user.getIsAdmin());
 		}
 
+	@Override
+	public long edit(User user) {
+
+		return this.jdbcTemplate.update("UPDATE USER SET login = ?, password = ?, name = ?,"+
+				"email = ?, inBlackList = ?, isAdmin = ? WHERE id = ?"
+              	, user.getLogin()
+              	, user.getPassword()
+                , user.getName()
+                , user.getEmail()
+                , user.getInBlackList()
+              	, user.getIsAdmin()
+				, user.getId());
+		
+	}	
+
+	@Override
+	public long deleteById(long id) {
+
+		return this.jdbcTemplate.update("DELETE FROM USER WHERE id = ?"
+                , id);
+	}	
+	
+	
 }

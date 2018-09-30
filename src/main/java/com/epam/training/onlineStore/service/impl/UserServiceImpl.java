@@ -81,5 +81,20 @@ public class UserServiceImpl implements UserService {
 	public User findById(long id) {
 		return this.userDAO.findById(id);
 	}
+	
+	@Override
+	public long add(User user) {
+		return this.userDAO.add(user);
+	}
+
+	@Override
+	public long edit(User user) {
+		return this.userDAO.edit(user);
+	}
+
+	@Override
+	public long deleteById(long id) {
+		return this.userDAO.deleteById(id);
+	}
 
 }
