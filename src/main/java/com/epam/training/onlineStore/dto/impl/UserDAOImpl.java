@@ -28,7 +28,7 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public User findById(long id) {
-		return this.jdbcTemplate.queryForObject("SELECT * FROM USER WHERE id = ?",
+		return this.jdbcTemplate.queryForObject("SELECT * FROM USER WHERE userId = ?",
                 new Object[]{id}, new UserMapper());
 	}
 
@@ -59,7 +59,7 @@ public class UserDAOImpl implements UserDAO {
 	public long edit(User user) {
 
 		return this.jdbcTemplate.update("UPDATE USER SET login = ?, password = ?, name = ?,"+
-				"email = ?, inBlackList = ?, isAdmin = ? WHERE id = ?"
+				"email = ?, inBlackList = ?, isAdmin = ? WHERE userId = ?"
               	, user.getLogin()
               	, user.getPassword()
                 , user.getName()
@@ -73,7 +73,7 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public long deleteById(long id) {
 
-		return this.jdbcTemplate.update("DELETE FROM USER WHERE id = ?"
+		return this.jdbcTemplate.update("DELETE FROM USER WHERE userId = ?"
                 , id);
 	}	
 	

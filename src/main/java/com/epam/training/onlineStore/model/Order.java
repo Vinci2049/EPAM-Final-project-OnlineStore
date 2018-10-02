@@ -1,5 +1,7 @@
 package com.epam.training.onlineStore.model;
 
+import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -8,10 +10,12 @@ import java.util.List;
 
 //@Entity
 //@Table(name = "products")
-public class Order extends BaseEntity {
+public class Order implements Serializable {
 	
-	private User client;
+	private long id;
+	private User user;
 	private Date date;
+	private double cost;
 	private boolean isPaid;
 
 	//private List<Product> productList;
@@ -19,23 +23,46 @@ public class Order extends BaseEntity {
 	
 	private List<Order> orderList;
 	
+	public Order() {
+		
+	}
 	
-	/*public void printOrder(Order order) {
-		System.out.println();
-		System.out.println("Заказ клиента № "+order.getId()+" от "+order.getDate());
-		System.out.println("Клиент: "+order.getClient().getId()+" - "+order.getClient().getName()+" "+order.getClient().getSurname());
-		System.out.println("Товары:");
-		//for (Product currentProduct : order.getProductList()) {
-		//	System.out.println(currentProduct.getName());
-		//}
-	}*/
-
-	public User getClient() {
-		return client;
+	public Order(long id, User user, Date date, double cost, boolean isPaid, List<ProductListItem> productList) {
+		this.id = id;
+		this.user = user;
+		this.date = date;
+		this.cost = cost;
+		this.isPaid = isPaid;
+		this.productList = productList;
 	}
 
-	public void setClient(User client) {
-		this.client = client;
+	public Order(Cart cart) {
+		
+		this.date = new Date();
+		this.user = cart.getUser();
+		this.setIsPaid(false);
+		this.productList = cart.getProductList();
+		/*for (ProductListItem productListItem : cart.getProductList()) {
+			this.productList.add(productListItem);
+		}*/
+
+	}
+	
+	
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public Date getDate() {
@@ -62,17 +89,6 @@ public class Order extends BaseEntity {
 		this.productList = productList;
 	}
 
-	public Order() {
-		
-	}
-	
-	public Order(User client, Date date, List<ProductListItem> productList, boolean isPaid) {
-		this.client = client;
-		this.date = date;
-		this.productList = productList;
-		this.isPaid = isPaid;
-	}
-
 	public void addItem(Product product, float quantity) {
 		ProductListItem productListItem = new ProductListItem(product, quantity);
 		this.productList.add(productListItem);
@@ -82,12 +98,25 @@ public class Order extends BaseEntity {
 		this.productList.add(productListItem);
 	}
 
-	public boolean isPaid() {
+	public double getCost() {
+		return cost;
+	}
+
+	public void setCost(double cost) {
+		this.cost = cost;
+	}
+	
+	public boolean getIsPaid() {
 		return isPaid;
 	}
 
-	public void setPaid(boolean isPaid) {
+	public void setIsPaid(boolean isPaid) {
 		this.isPaid = isPaid;
 	}
-
+	
+	public boolean isNew() {
+		//return this.id == null;
+		return (Long) this.id == null;
+	}
+	
 }

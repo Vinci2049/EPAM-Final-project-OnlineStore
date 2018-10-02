@@ -27,7 +27,7 @@ public class ProductDAOImpl implements ProductDAO {
 
 	@Override
 	public Product findById(long id) {
-		return this.jdbcTemplate.queryForObject("SELECT * FROM product WHERE id = ?",
+		return this.jdbcTemplate.queryForObject("SELECT * FROM product WHERE productId = ?",
                 new Object[]{id}, new ProductMapper());
 	}
 	
@@ -44,7 +44,7 @@ public class ProductDAOImpl implements ProductDAO {
 	@Override
 	public long edit(Product product) {
 
-		return this.jdbcTemplate.update("UPDATE PRODUCT SET name = ?, price = ?, description = ? WHERE id = ?"
+		return this.jdbcTemplate.update("UPDATE PRODUCT SET name = ?, price = ?, description = ? WHERE productId = ?"
                 , product.getName()
               	, product.getPrice()
 				, product.getDescription()
@@ -55,7 +55,7 @@ public class ProductDAOImpl implements ProductDAO {
 	@Override
 	public long deleteById(long id) {
 
-		return this.jdbcTemplate.update("DELETE FROM PRODUCT WHERE id = ?"
+		return this.jdbcTemplate.update("DELETE FROM PRODUCT WHERE productId = ?"
                 , id);
 	}	
 	

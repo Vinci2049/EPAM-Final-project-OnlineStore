@@ -31,7 +31,6 @@
   				<table id="purchases">
 					<tbody>
 					
-						<c:forEach var="orderIterator" items="${orders}">
 						<tr>
 						
 							<td class="name">
@@ -61,6 +60,18 @@
 									<img src="${delete}" title="Удалить заказ" alt="Удалить заказ">
 								</a>			
 							</td>
+
+						<tr>
+
+						<c:forEach var="productIterator" items="${orderIterator.productList}">
+						<tr>
+							<td class="price">
+								${productIterator.product.name}
+							</td>
+							<td class="price">
+								${productIterator.product.price} $
+							</td>
+
 						
 						</tr>
 						</c:forEach>

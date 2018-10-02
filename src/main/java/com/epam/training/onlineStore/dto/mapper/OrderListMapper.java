@@ -13,14 +13,16 @@ import com.epam.training.onlineStore.model.Order;
 import com.epam.training.onlineStore.model.ProductListItem;
 import com.epam.training.onlineStore.model.User;
 
-public class OrderMapper implements ResultSetExtractor<Order>{		
+public class OrderListMapper implements ResultSetExtractor<List<Order>>{		
 
 	@Override
-	public Order extractData(ResultSet rs) throws SQLException, DataAccessException {
+	public List<Order> extractData(ResultSet rs) throws SQLException, DataAccessException {
+		
+		List<Order> orders = new ArrayList<>();
+		
+		long currentId = 0L;
 
 		Order order = null;
-		
-		boolean isFirstRow = true;
 		
 		long id = 0L;
 		User user = null;
@@ -32,27 +34,39 @@ public class OrderMapper implements ResultSetExtractor<Order>{
 		
         while (rs.next()) {
         	
-        	if (isFirstRow) {
+        	id = rs.getLong("ClientOrderId");
+        	
+        	if (id != currentId) {
+        	
+                if (user != null) {
+                	order = new Order(id, user, date, cost, isPaid, productList);
+                	orders.add(order);
+                }
+           		
+        		currentId = id;
          		UserMapper userMapper = new UserMapper();
         		user = userMapper.mapRow(rs, 0);
-        		id = rs.getLong("ClientOrderId");
-        		date = rs.getDate("date");
+         		date = rs.getDate("date");
         		cost = rs.getDouble("cost");
         		isPaid = rs.getBoolean("isPaid");
+        		
+        		productList = new ArrayList<>();
+       		
         	}
         	
         	ProductListItemMapper productListItemMapper = new ProductListItemMapper();
         	ProductListItem productListItem = productListItemMapper.mapRow(rs, 0);
         	productList.add(productListItem);
-        	        	
-        }
-        
-        if (user != null) {
-        	order = new Order(id, user, date, cost, isPaid, productList);
+        	        	        
         }
         	
-        return order;
+        if (user != null) {
+        	order = new Order(id, user, date, cost, isPaid, productList);
+        	orders.add(order);
+        }
+        
+        return orders;
 		
 	}	
-	
+
 }

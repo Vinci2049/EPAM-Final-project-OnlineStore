@@ -35,13 +35,14 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public long edit(Order order) {
-		return this.orderDAO.edit(order);
-	}
-
-	@Override
-	public long deleteById(long id) {
-		return this.orderDAO.deleteById(id);
-	}
-
+	public long setPaidById(long orderId, boolean isPaid) {
+		return this.orderDAO.setPaidById(orderId, isPaid);
+	}	
+	
+//	@Override
+//	public long fillFromCart(User user) {
+//		return this.orderDAO.fillFromCart(user);
+//	}	
+	
+	
 }

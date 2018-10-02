@@ -18,19 +18,19 @@ public class CartServiceImpl implements CartService {
     }	
 	
 	@Override
-	public Cart findById(long idClient) {
-		return this.cartDAO.findById(idClient);
+	public Cart findById(long userId) {
+		return this.cartDAO.findById(userId);
 	}
 	
 	
 	@Override
-	public void addProductById(long productId) {
-		this.cartDAO.addProductById(productId);
+	public void addProductById(long userId, long productId) {
+		this.cartDAO.addProductById(userId, productId);
 	}
 
 	@Override
-	public void removeProductById(long productId) {
-		this.cartDAO.removeProductById(productId);
+	public void removeProductById(long userId, long productId) {
+		this.cartDAO.removeProductById(userId, productId);
 		
 	}
 	

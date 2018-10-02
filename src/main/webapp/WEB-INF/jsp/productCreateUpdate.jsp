@@ -23,7 +23,6 @@
 		<div id="middle">
 		
 			<H1>
-				<!-- th:block th:if="${pet['new']}">New </th:block-->
 				<c:if test="${product['new']}">New</c:if>
 				Товар
 	    	</H1>

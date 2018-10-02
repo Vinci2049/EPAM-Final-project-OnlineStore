@@ -188,7 +188,7 @@ public class ProductController {
     
     
 	@RequestMapping("/products/{productId}/delete")
-    public String removeFromCart(HttpServletRequest request,
+    public String deleteProduct(HttpServletRequest request,
          @PathVariable(name = "productId", required = false) Long productId) {
     	
 	  	productService.deleteById(productId);

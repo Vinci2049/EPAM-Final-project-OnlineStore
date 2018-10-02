@@ -8,7 +8,7 @@
 	    <li><a href="/login">Авторизация</a></li>
 	</c:if>
 	   
-    <c:if test="${currentUser != null}">
+    <c:if test="${currentUserName != ''}">
     	<li><a href="/logout">Выход</a></li>
     </c:if>
     
@@ -24,13 +24,15 @@
     
 </ul>
 
+<div id="cart_informer">
+	<a href="/cart">Корзина</a>
+    : <span class="counter">${cartProductCount}</span> товара(ов)
+</div>
+
 <div id="user_informer">
 	Пользователь: ${currentUserName}
 	Это админ: ${currentUserIsAdmin}
 </div>
 
-<div id="cart_informer">
-	<a href="/cart">Корзина</a>
-    : <span class="counter">${cartProductCount}</span> товара(ов)
-</div>
+
 

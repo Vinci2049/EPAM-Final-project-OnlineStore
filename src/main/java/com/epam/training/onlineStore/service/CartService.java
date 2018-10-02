@@ -7,8 +7,8 @@ public interface CartService {
 	Cart findById (long id);
 	//Map<Product, Integer> getProductList(int idClient);
 
-	void addProductById(long id);
+	void addProductById(long userId, long productId);
 
-	void removeProductById(long id);	
+	void removeProductById(long userId, long productId);	
 	
 }

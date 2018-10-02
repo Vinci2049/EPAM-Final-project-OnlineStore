@@ -5,23 +5,23 @@ import java.util.List;
 
 public class Cart {
 
-	private User client;
+	private User user;
 	private Date date;
 	
 	private List<ProductListItem> productList;
 	//private Map<Product, Integer> productList;
 	
-	public Cart(User client, Date date, List<ProductListItem> productList) {
-		this.client = client;
+	public Cart(User user, Date date, List<ProductListItem> productList) {
+		this.user = user;
 		this.date = date;
 		this.productList = productList;
 	}
 	
-	public User getClient() {
-		return client;
+	public User getUser() {
+		return user;
 	}
-	public void setClient(User client) {
-		this.client = client;
+	public void setUser(User user) {
+		this.user = user;
 	}
 	public Date getDate() {
 		return date;

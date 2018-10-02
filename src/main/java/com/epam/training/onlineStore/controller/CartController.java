@@ -1,5 +1,7 @@
 package com.epam.training.onlineStore.controller;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.epam.training.onlineStore.model.Cart;
 import com.epam.training.onlineStore.model.ProductListItem;
+import com.epam.training.onlineStore.model.User;
 import com.epam.training.onlineStore.service.CartService;
+import com.epam.training.onlineStore.service.UserManager;
 
 @Controller
 public class CartController {
@@ -24,24 +28,30 @@ public class CartController {
 		this.cartService = cartService;
 	}
 	
+    @Autowired
+    private UserManager userManager;
+
 	
     @RequestMapping("/cart")
     public ModelAndView hello(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
         
-        //Map<Product, Integer> productList = cartService.getAll(idClient);
+ 		User currentUser = userManager.getUser();
+        Cart cart = cartService.findById(currentUser.getId());
         
-        Cart cart = cartService.findById(1);
+    	List<ProductListItem> products = new ArrayList<ProductListItem>();
         
-        List<ProductListItem> products = cart.getProductList();     
+        if (cart == null) {
+        	cart = new Cart(currentUser, new Date(), products);
+        } else {
+        	products = cart.getProductList();
+        }
         
         modelAndView.setViewName("cart");
 
-        //User currentUser = userManager.getUser();
-
-        //modelAndView.addObject("client", client);
-        //modelAndView.addObject("productList", productList);
- 
+        modelAndView.addObject("cart", cart);
+        //modelAndView.addObject("user", currentUser);
+        
         modelAndView.addObject("products", products);
 
         return modelAndView;
@@ -52,7 +62,8 @@ public class CartController {
     public String addToCart(HttpServletRequest request,
          @PathVariable(name = "productId", required = false) Long productId) {
     	
-	  	cartService.addProductById(productId);
+ 		User currentUser = userManager.getUser();
+	  	cartService.addProductById(currentUser.getId(), productId);
 
     	return "redirect:/index.html";
 
@@ -62,7 +73,8 @@ public class CartController {
     public String removeFromCart(HttpServletRequest request,
          @PathVariable(name = "productId", required = false) Long productId) {
     	
-	  	cartService.removeProductById(productId);
+ 		User currentUser = userManager.getUser();
+	  	cartService.removeProductById(currentUser.getId(), productId);
 
     	return "redirect:/cart";
 

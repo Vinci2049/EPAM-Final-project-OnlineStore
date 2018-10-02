@@ -1,5 +1,6 @@
 package com.epam.training.onlineStore.dto.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,9 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.epam.training.onlineStore.dto.CartDAO;
 import com.epam.training.onlineStore.dto.mapper.CartMapper;
-import com.epam.training.onlineStore.dto.mapper.ProductListItemMapper;
 import com.epam.training.onlineStore.model.Cart;
-import com.epam.training.onlineStore.model.ProductListItem;
 
 @Repository
 public class CartDAOImpl implements CartDAO {
@@ -21,95 +20,59 @@ public class CartDAOImpl implements CartDAO {
     public CartDAOImpl(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
-	
-	/*@Override
-	public Cart findById(long idClient) {
-		return this.jdbcTemplate.queryForObject("SELECT * FROM cart WHERE Client_idClient = ?",
-                new Object[]{idClient}, new CartMapper());
-		//return this.jdbcTemplate.query("SELECT * FROM cart", new CartMapper());
-	}*/
-
-
+    	
 	@Override
-	public Cart findById(long idClient) {
-		//return this.jdbcTemplate.queryForObject("SELECT * FROM cart WHERE Client_idClient = ?",
-        //        new Object[]{idClient}, new CartMapper());
-		//return this.jdbcTemplate.queryForObject("Select * from cart join cartproductlist on client_idClient = cart_client_idClient where client_idClient = ? limit 1",
-		//return (Cart) this.jdbcTemplate.query("Select * from cart join cartproductlist on client_idClient = cart_client_idClient where client_idClient = ?",
-        //        new Object[]{idClient}, new CartMapper());
-		Cart cart = this.jdbcTemplate.queryForObject("Select * from cart where client_idClient = ?",
-                new Object[]{idClient}, new CartMapper());
-		
-		List<ProductListItem> productList = this.jdbcTemplate.query("Select * from cartproductlist left join product on product_idProduct = id where cart_client_idClient = ?",
-                new Object[]{idClient}, new ProductListItemMapper());
-		
-		cart.setProductList(productList);
-		
+	public Cart findById(long idUser) {
+				
+		Cart cart  = this.jdbcTemplate.query("Select * from " + 
+				"(select * from cart join user on user_id = userId) User " + 
+				"join " + 
+				"(select * from cartproductlist join product on product_idProduct = productId) Product " + 
+				"on user_id = cart_user_id where user_id = ?",
+                new Object[]{idUser}, new CartMapper());
+
 		return cart;
-		
-		//return this.jdbcTemplate.query("SELECT * FROM cart", new CartMapper());
+			  
 	}
 	
 	
 	@Override
-	public int addProductById(long idProduct) {
-		
-		
-		// ВРЕМЕННО
-		int idClient = 1;
-				
-		// Надо сначала выбрать, вдруг такой товар уже есть, тогда его инкрементируем
-		// Корзины это тоже касается
+	public int addProductById(long idUser, long idProduct) {
 
+		// ВРЕМЕННО !!! ТУТ ПРОВЕРИТЬ ДВА РЕЗУЛЬТАТА НАДО НАВЕРНОЕ
+		// ON Duplicate key - правильно ли в первом выражении ???
 		
-		return this.jdbcTemplate.update("INSERT INTO CartProductList (cart_client_idclient, product_idProduct, quantity) VALUES"
+		Date date = new Date();
+		this.jdbcTemplate.update("INSERT INTO Cart (user_id, date) VALUES"
+		        + "(?,?)"
+		        + " ON DUPLICATE KEY UPDATE date = ?"
+		      , idUser
+		      , date
+		      , date);
+		
+		
+		return this.jdbcTemplate.update("INSERT INTO CartProductList (cart_user_id	, product_idProduct, quantity) VALUES"
         + "(?,?,?)"
         + " ON DUPLICATE KEY UPDATE quantity=quantity+1"
-      , idClient
+      , idUser
       , idProduct
       , 1);
 
-		//mysql_query("INSERT INTO Progress ( Id_Stud, Id_Subj, Mark) VALUES ('".$User_Data['id']."','".$id."', '".$Mark."') ON DUPLICATE KEY UPDATE Mark='".$Mark."';");
-		
-		
-		
-//		List<ProductListItem> productList = this.jdbcTemplate.query("Select * from cartproductlist left join product on product_idProduct = id where cart_client_idClient = ?",
-//                new Object[]{idClient}, new ProductListItemMapper());
-//
-//		boolean isContains = false;
-//		for(ProductListItem currentItem : productList) {
-//			if (currentItem.getProduct().getId() == idProduct) {
-//				currentItem.setQuantity(currentItem.getQuantity()+1);
-//				isContains = true;
-//				break;
-//			}
-//		}
-//		if (!isContains) {
-//			//productList.add(new ProductListItem(Product.getById(idProduct), 1.0);
-//			return this.jdbcTemplate.update("INSERT INTO CartProductList (cart_client_idclient, product_idProduct, quantity) VALUES"
-//		            + "(?,?,?)"
-//		          , idClient
-//		          , idProduct
-//		          , 1);			
-//		}		
-		
-//		return this.jdbcTemplate.update("INSERT INTO CartProductList (cart_client_idclient, product_idProduct, quantity) VALUES"
-//	            + "(?,?,?)"
-//	          , idClient
-//	          , idProduct
-//	          , 1);
-
 	}
 
 	@Override
-	public int removeProductById(long idProduct) {
-		// ВРЕМЕННО
-		int idClient = 1;
+	public int removeProductById(long idUser, long idProduct) {
 				
-		return this.jdbcTemplate.update("DELETE FROM CartProductList WHERE cart_client_idclient = ? AND product_idProduct = ?"
+		return this.jdbcTemplate.update("DELETE FROM CartProductList WHERE Cart_User_id = ? AND Product_idProduct = ?"
         //+ "(?,?)"
-      , idClient
+      , idUser
       , idProduct);
+	}
+
+	@Override
+	public List<Cart> getAll() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	
