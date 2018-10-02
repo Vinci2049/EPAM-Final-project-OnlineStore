@@ -31,7 +31,6 @@
 
 <div id="user_informer">
 	Пользователь: ${currentUserName}
-	Это админ: ${currentUserIsAdmin}
 </div>
 
 

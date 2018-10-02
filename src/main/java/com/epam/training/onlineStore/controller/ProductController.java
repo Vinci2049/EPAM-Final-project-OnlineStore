@@ -23,10 +23,7 @@ import com.epam.training.onlineStore.model.Product;
 public class ProductController {
 	
 	private final ProductService productService;
-	
-    //@Autowired
-    //private UserManager userManager;
-    
+	    
 	@Autowired
 	public ProductController(ProductService productService) {
 		this.productService = productService;
@@ -34,8 +31,6 @@ public class ProductController {
 	
 	
     @RequestMapping("/index.html")
-//    public ModelAndView hello(HttpServletRequest request,
-//            @PathVariable(name = "pageId", required = false) String pageId) {
 	public ModelAndView hello(HttpServletRequest request) {
         
     	ModelAndView modelAndView = new ModelAndView();
@@ -89,19 +84,6 @@ public class ProductController {
         return "productCreateUpdate";
     }
     
-    
-    
-//    @PostMapping("product/new")
-////  public ModelAndView addProduct(HttpServletRequest request,
-////          @PathVariable(name = "pageId", required = false) String pageId) {      
-//	public String newProduct(Model model,
-//          Product product) {
-//
-//    	productService.add(product);
-//  	
-//    	return "redirect:/index.html";
-//
-//	}    
    
     @PostMapping("/products/new")
     public String processCreationForm(@Valid Product product, BindingResult result, ModelMap model) {
@@ -171,21 +153,7 @@ public class ProductController {
         	return "redirect:/index.html";
         }
     }
-    
-    /*@PostMapping("/products/{productId}/del")
-    public ModelAndView delGenre(@ModelAttribute(value = "id") long id) {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName(REDIRECT_ADMIN_GENRES);
-
-        if (bookService.isGenreUsed(id)) {
-            modelAndView.addObject(ERROR, "Ошибка! Есть книга с таким жанром. Сначала удалите данную книгу");
-        } else {
-            genreService.deleteGenre(id);
-            modelAndView.addObject(ALL_OK, "Жанр успешно удален");
-        }
-        return modelAndView;
-    }*/
-    
+        
     
 	@RequestMapping("/products/{productId}/delete")
     public String deleteProduct(HttpServletRequest request,

@@ -10,6 +10,8 @@
 
 		<c:url value="/resources/images/pencil.png" var="edit" />
 		<c:url value="/resources/images/delete.png" var="delete" />
+		<c:url value="/resources/images/cash_stack.png" var="PaidImg" />
+		<c:url value="/resources/images/cash_stack_gray.png" var="NotPaidImg" />
 
 		<link rel="stylesheet" href="${styleCss}"  />
    		<script src="${jqueryJs}"></script>
@@ -26,28 +28,56 @@
 		
 			<H1>Заказы</H1>
 
-    		<c:forEach var="orderIterator" items="${orders}">
     		
   				<table id="purchases">
-					<tbody>
+
+    		<c:forEach var="orderIterator" items="${orders}">
+  				
+  				
+					<!-- tbody-->
 					
 						<tr>
 						
-							<td class="name">
-								<a href="product1.html">${ordertIterator.user}</a>
+							<td>
+							${orderIterator.id}
 							</td>
-							<td class="price">
-								${orderIterator.date} $
+							
+							<td>
+							<c:if test="${orderIterator.user != null}">
+								${orderIterator.user.login}
+							</c:if>	
 							</td>
-							<td class="price">
-								${orderIterator.date} $
+							<%--
+							<td>
+							<c:if test="${orderIterator.user != null}">
+							${orderIterator.user.login}
+							</c:if>
 							</td>
+							<td>
+							<c:if test="${orderIterator.user != null}">
+							${orderIterator.user.name}
+							</c:if>
+							</td>
+							<td>
+								${orderIterator.date}
+							</td>
+							 --%>
+							 
 							<td class="remove" id="pay">
-								<a href="/order/${orderIterator.id}"/pay>
-									<img src="${delete}" title="Оплатить" alt="Оплатить">
+								<c:if test="${orderIterator.isPaid != false || orderIterator.isPaid != null}">
+								<a href="/orders/${orderIterator.id}/setPaid">
+									<img src="${PaidImg}" title="Оплачено" alt="Отменить оплату">
 								</a>								
+								</c:if>
+								<c:if test="${orderIterator.isPaid == false || orderIterator.isPaid == null}}">
+								<a href="/orders/${orderIterator.id}/setPaid">
+									<img src="${NotPaidImg}" title="Оплатить" alt="Оплатить">
+								</a>								
+								</c:if>
+
 							</td>
 
+							<%--
 							<td class="remove" id="edit">
 								<a href="/orders/${orderIterator.id}/edit">
 									<img src="${edit}" title="Редактировать" alt="Редактировать заказ">
@@ -60,27 +90,29 @@
 									<img src="${delete}" title="Удалить заказ" alt="Удалить заказ">
 								</a>			
 							</td>
-
-						<tr>
+ 							--%>
+						</tr>
 
 						<c:forEach var="productIterator" items="${orderIterator.productList}">
 						<tr>
-							<td class="price">
+							<td>
 								${productIterator.product.name}
 							</td>
-							<td class="price">
+							<td>
 								${productIterator.product.price} $
 							</td>
-
+							
+							<td>
+								${productIterator.quantity}
+							</td>
 						
 						</tr>
 						</c:forEach>
 
-					</tbody>
-
-				</table>
+					<!-- /tbody-->
     		
 			</c:forEach>
+				</table>
 
 		</div>
 
