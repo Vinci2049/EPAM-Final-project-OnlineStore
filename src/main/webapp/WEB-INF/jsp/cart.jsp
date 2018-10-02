@@ -48,9 +48,7 @@
 								${productIterator.product.price} $
 							</td>
 							<td class="amount">
-								<span class="minus">-</span>
 								<input class="quantity" type="text" value=${productIterator.quantity}>
-								<span class="plus">+</span>
 							</td>
 							<td class="remove" id="remove1">
 								<a href="/cart/remove/${productIterator.product.id}">
@@ -65,42 +63,13 @@
 
 				</table>
 
-			</form>
-			
+			</form>			
 						
 			<form action="<c:url value="/orders/new"/>" method="post">
 				<button type="submit">Оформить заказ</button>
-			</form>
-			
+			</form>			
 			
 		</div>
-
-			<script>
-			$(document).ready(function() {
-				$('.minus').click(function () {
-					var $input = $(this).parent().find('input');
-					var count = parseInt($input.val()) - 1;
-					count = count < 1 ? 1 : count;
-					$input.val(count);
-					$input.change();
-	
-					var $input2 = $('.counter');
-					var count2 = parseInt($input2.text()) - 1;
-					count2 = count2 < 2 ? 2 : count2
-					$input2.text(count2);
-					return false;
-				});
-				$('.plus').click(function () {
-					var $input = $(this).parent().find('input');
-					$input.val(parseInt($input.val()) + 1);
-					$input.change();
-	
-					var $input2 = $('.counter');
-					$input2.text(parseInt($input2.text()) + 1);
-					return false;
-				});
-			});
-			</script>
 
 	</body>
 </html>

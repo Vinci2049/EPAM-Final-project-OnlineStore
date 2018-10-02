@@ -29,7 +29,7 @@
 
 			<H1>
 				<c:if test="${order['new']}">New</c:if>
-				Заказ
+				Заказ оформлен
 	    	</H1>
 
 			 <!-- >form method="POST" name="order"-->
@@ -39,7 +39,6 @@
 
 				<!--  >table id="purchases"-->
 				<table>
-					
 						
 			        	<tr><td>id: </td><td><input value="${order.id}" type="text" id = "id" name="id"><td></tr>
 			        	 		        	
@@ -47,40 +46,28 @@
 			        	 <form:input path="date" value="${order.date}" type="datetime"/>
 			        	 <td></tr>
 			        	
-			        	<tr><td>Клиент: </td><td><input value="${userLogin}" type="text"><td></tr>
-			        	
-			        	<%-- 
-			        	<tr><td>Клиент: </td><td><!-- input value="${order.user}" type="text" id = "user" name="user"-->
-				        	 <form:input path="user"/>
-				        	 <td></tr>
-	   					--%>
-	   					
+			        	<tr><td>Клиент: </td><td><input value="${userLogin}" type="text"><td></tr>	   					
 	   
 			        	<tr><td>Оплачен: </td><td><!-- input value="${order.isPaid}" type="checkbox" id = "order.isPaid" name="order.isPaid"-->
 			        	 <form:input path="isPaid" value="${order.isPaid}" />
 			        	<td></tr>
 	 
 			        	<tr><td>Сумма: </td><td><input value="${order.cost}" type="text" id = "cost" name="cost"><td></tr>
-
- 			        	 
  			        	
 						<c:forEach var="productList" items="${order.productList}" varStatus="status">
 						<tr>
 
-
-			        	<td><!-- input value="${productIterator.product}" type="text" id="order.productList.product" name="order.productList.quantity"-->
+			        	<td>
 			        	 <form:input path="productList[${status.index}].product" value="${productList.product}" />
 			        	 </td>
-			        	<!-- td><input value="${productIterator.product.name}" type="text" name="name"></td-->
-			        	<td><!-- input value="${productIterator.quantity}" type="text" id = "productList.quantity" name="productList.quantity"-->
+			        	
+			        	<td>
 			        	 <form:input path="productList[${status.index}].quantity" value="${productList.quantity}" />
 			        	 </td>
-			        	<!-- td><input value="${productIterator.product.price}" type="text" name="price"></td-->
 						 
 						</tr>
 						
 						</c:forEach>
-						
 
 				</table>
 
@@ -88,7 +75,10 @@
 
 	        </form:form>
 			
-			<form action="<c:url value="/orders/pay"/>" method="post">
+			<br />
+			<br />
+			
+			<form action="<c:url value="/orders/${order.id}/setPaid"/>" method="post">
 				<button type="submit">Оплатить</button>
 			</form>
 			

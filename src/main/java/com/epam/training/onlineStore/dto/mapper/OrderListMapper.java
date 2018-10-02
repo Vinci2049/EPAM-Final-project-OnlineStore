@@ -39,7 +39,7 @@ public class OrderListMapper implements ResultSetExtractor<List<Order>>{
         	if (id != currentId) {
         	
                 if (user != null) {
-                	order = new Order(id, user, date, cost, isPaid, productList);
+                	order = new Order(currentId, user, date, cost, isPaid, productList);
                 	orders.add(order);
                 }
            		

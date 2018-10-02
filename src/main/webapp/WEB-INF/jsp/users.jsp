@@ -27,41 +27,48 @@
 			<H1>Пользователи</H1>
 
 			<c:if test="${currentUserIsAdmin}">
-				<a href="/newuser">Добавить нового пользователя</a>			
+				<a href="/registration">Добавить нового пользователя</a>			
 			</c:if>
+			
+			<br />
+			<br />
 
-    		<!-- Товары -->
-    		<ul class="tiny_products">
-    		<c:forEach var="userIterator" items="${users}">
-				<!-- Товар -->
-				<li class="product">
+			<table>
+    			<tr>
+    				<th>Логин</th>
+   					<th>Имя</th>
+   					<th>E-mail</th>
+   					<th>В черном списке</th>
+   					<th>Это администратор</th>
+    			</tr>
+	    		<c:forEach var="userIterator" items="${users}">
+					<tr>				
+						<td>${userIterator.login}</td>
+						<td>${userIterator.name}</td>
+						<td>${userIterator.email}</td>
+						<td>${userIterator.inBlackList}</td>
+						<td>${userIterator.isAdmin}</td>
+						
+						<td>
+		 					<c:if test="${currentUserIsAdmin}">
+								<a href="/users/${userIterator.id}/edit">
+									<img src="${edit}" title="Редактировать пользователя" alt="Редактировать пользователя">
+								</a>
+							</c:if>
+						</td>
+						
+						<td>
+		 					<c:if test="${currentUserIsAdmin}">
+								<a href="/users/${userIterator.id}/delete">
+									<img src="${delete}" title="Удалить пользователя" alt="Удалить пользователя">
+								</a>			
+							</c:if>
+						</td>
+	 
+					</tr>
+				</c:forEach>
 
-					<!-- Кнопки админа -->			
-					<c:if test="${currentUserIsAdmin}">
-						<a href="/users/${userIterator.id}/edit">
-							<img src="${edit}" title="Редактировать пользователя" alt="Редактировать пользователя">
-						</a>
-						<a href="/users/${userIterator.id}/delete">
-							<img src="${delete}" title="Удалить пользователя" alt="Удалить пользователя">
-						</a>			
-					</c:if>
-					<!-- Кнопки админа (The End) -->
-				
-					<!-- Название товара -->
-					<h3>
-						<a href="/user/${userIterator.id}">${userIterator.login}${userIterator.name}</a>
-					</h3>
-					<!-- Название товара (The End) -->
-					<!-- Цена -->
-					<span class="price">
-						<!--${productIterator.price} $-->
-					</span>
- 
-				</li>
-				<!-- Товар (The End) -->
-			</c:forEach>
-
-      		</ul>
+			</table>
 		
 		</div>
 

@@ -7,14 +7,13 @@ import com.epam.training.onlineStore.model.Cart;
 public interface CartDAO {
 
 	List<Cart> getAll();
-	//long add(Cart cart);
-
 	
-	Cart findById(long idUser);
+	Cart findById(long userId);
 	
-	//List<ProductListItem> getProductList(long idClient);
+	int addProductById(long userId, long productId);
 	
-	int addProductById(long idUser, long idProduct);
+	int removeProductById(long userId, long productId);
 	
-	int removeProductById(long idUser, long idProduct);
+	int clearProductList(long userId);
+	
 }

@@ -34,62 +34,9 @@ public class AuthInterceptor implements HandlerInterceptor {
             response.sendRedirect("/login");
             return false;
         }
-    	
-           /* if (currentUser == null) {
-            	String currentUserName = "Не определен";
-            	boolean currentUserIsAdmin = false;
-            	
-            } else {
-            	String currentUserName = "Определен";
-            	boolean currentUserIsAdmin = true;
-//            	modelAndView.addObject("currentUserName", currentUser.getLogin());
-//            	modelAndView.addObject("currentUserIsAdmin", currentUser.getIsAdmin());
-            
-        }*/
-
 
         return true;
 
     }
 
-    /* @Override
-     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-                            ModelAndView modelAndView) {
-         User currentUser = userManager.getUser();
-         
-         if (modelAndView != null) {
-//             System.out.println(modelAndView);
-//             System.out.println(currentUser);
-//             System.out.println(modelAndView==null);
-//             System.out.println(currentUser==null);
-//             //modelAndView.addObject("currentUser", currentUser);
-             
-             if (currentUser == null) {
- 
-             	modelAndView.addObject("currentUserName", "Не определен");
-             	modelAndView.addObject("currentUserIsAdmin", false);
-             	
-             } else {
-            	 
-             	modelAndView.addObject("currentUserName", "Определен");
-             	modelAndView.addObject("currentUserIsAdmin", true);
-//             	modelAndView.addObject("currentUserName", currentUser.getLogin());
-//             	modelAndView.addObject("currentUserIsAdmin", currentUser.getIsAdmin());
-             }	
-             
-         }
-         
-//         if (currentUser == null) {
-//         	modelAndView.addObject("currentUserName", "Не определен");
-//         	modelAndView.addObject("currentUserIsAdmin", false);
-//         	
-//         } else {
-//         	modelAndView.addObject("currentUserName", currentUser.getLogin());
-//         	modelAndView.addObject("currentUserIsAdmin", currentUser.getIsAdmin());
-//         } 	
-     }*/
-
-     
-     
-     
 }

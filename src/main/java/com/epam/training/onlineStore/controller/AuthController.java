@@ -65,7 +65,6 @@ public class AuthController {
     
     
     @GetMapping("/registration")
-    //public ModelAndView registrationPage(User user) {
     public ModelAndView registrationPage() {
         
     	ModelAndView modelAndView = new ModelAndView();
@@ -98,11 +97,4 @@ public class AuthController {
 
     }
 
-//    @ExceptionHandler(NotFoundException.class)
-//    public ModelAndView handleException(RuntimeException ex) {
-//        ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.setViewName("error");
-//        modelAndView.addObject("error", ex.getMessage());
-//        return modelAndView;
-//    }
 }

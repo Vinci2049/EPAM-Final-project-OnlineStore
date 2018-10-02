@@ -18,13 +18,4 @@ public class ExceptionHandlerControllerr {
         return modelAndView;
     }
     
-    
-   /* @ExceptionHandler(Exception.class)
-    public ModelAndView handleRuntimeException(Exception ex) {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("error");
-        modelAndView.addObject("error", "Что-то пошло не так, обратитесь в службу тех поддержки");
-        return modelAndView;
-    }*/
-
 }

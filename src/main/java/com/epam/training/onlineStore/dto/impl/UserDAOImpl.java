@@ -67,7 +67,6 @@ public class UserDAOImpl implements UserDAO {
                 , user.getInBlackList()
               	, user.getIsAdmin()
 				, user.getId());
-		
 	}	
 
 	@Override
@@ -76,6 +75,5 @@ public class UserDAOImpl implements UserDAO {
 		return this.jdbcTemplate.update("DELETE FROM USER WHERE userId = ?"
                 , id);
 	}	
-	
 	
 }

@@ -15,11 +15,9 @@ public class ProductListItemMapper implements RowMapper<ProductListItem> {
 
 		ProductMapper productMapper = new ProductMapper();
 		
-		//rs.getInt("idProduct");
 		Product product = productMapper.mapRow(rs, rowNum);
 		
 		ProductListItem productListItem = new ProductListItem(
-				//rs.getInt("id"),
 				product,
 				rs.getFloat("Quantity"));
 		

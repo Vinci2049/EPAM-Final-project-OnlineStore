@@ -23,7 +23,6 @@
 		<div id="middle">
 		
 			<H1>
-				<!-- th:block th:if="${pet['new']}">New </th:block-->
 				<c:if test="${user['new']}">New</c:if>
 				Пользователь
 	    	</H1>
@@ -36,8 +35,8 @@
 		        	<tr><td>Пароль: </td><td><input value="${user.password}" type="text" name="password"><td></tr>
 		        	<tr><td>Имя: </td><td><input value="${user.name}" type="text" name="name"><td></tr>
  		        	<tr><td>E-mail:</td><td><input value="${user.email}" type="text" name="email"><td></tr>
-		        	<tr><td>В черном списке:</td><td><input value="${user.inBlackList}" type="checkbox" name="InBlackList"></td></tr>
-		        	<tr><td>Это админ:</td><td><input value="${user.isAdmin}" type="checkbox" name="IsAdmin"></td></tr>
+		        	<tr><td>В черном списке:</td><td><input value="${user.inBlackList}" type="text" name="InBlackList"></td></tr>
+		        	<tr><td>Это админ:</td><td><input value="${user.isAdmin}" type="text" name="IsAdmin"></td></tr>
 				</table>
 	            <button type="submit">Записать</button>
 		

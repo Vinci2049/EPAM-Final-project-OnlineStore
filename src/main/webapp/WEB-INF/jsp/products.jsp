@@ -30,6 +30,9 @@
 			<c:if test="${currentUserIsAdmin}">
 				<a href="/products/new">Добавить новый товар</a>			
 			</c:if>
+			
+			<br />
+			<br />
 
     		<!-- Товары -->
     		<ul class="tiny_products">

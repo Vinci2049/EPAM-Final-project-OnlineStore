@@ -74,38 +74,10 @@ public class OrderDAOImpl implements OrderDAO {
 			            return ps;
 			        }
 			    },
-			    keyHolder);
-			
-//			return keyHolder.getKey().intValue();
-//
-//		.jdbcTemplate.update("INSERT INTO ClientOrder (User_id, date, cost, isPaid) VALUES Statement.RETURN_GENERATED_KEYS"
-//		        + "(?,?,?,?)"
-//		      ,1 //, order.getUser().getId()
-//		      , order.getDate()
-//		      , order.getCost()
-//		      , order.getIsPaid()
-//		      ,keyHolder
-//		      ,new String[] {"ClientOrderId"});
-		
+			    keyHolder);		
 		 
 		final long newId = keyHolder.getKey().longValue();
 
-
-//		this.jdbcTemplate.update("INSERT INTO ClientOrder (User_id, date, cost, isPaid) VALUES Statement.RETURN_GENERATED_KEYS"
-//		        + "(?,?,?,?)"
-//		      ,1 //, order.getUser().getId()
-//		      , order.getDate()
-//		      , order.getCost()
-//		      , order.getIsPaid()
-//		      ,keyHolder
-//		      ,new String[] {"ClientOrderId"});
-//		
-//		 
-//		final long newId = keyHolder.getKey().longValue();
-//		System.out.println(newId);
-		
-		
-		
 		if (order != null && order.getProductList() != null) {
 		
 			for (ProductListItem productListItem : order.getProductList()) {
@@ -115,22 +87,18 @@ public class OrderDAOImpl implements OrderDAO {
 					, newId
 	        		, productListItem.getProduct().getId()
 	        		, productListItem.getQuantity());
-				
 			}
-		
 		}
 
 		return 1;
-
 	}
 
 	
 	@Override
 	public long setPaidById(long orderId, boolean isPaid) {
 		return this.jdbcTemplate.update("UPDATE CLIENTORDER SET isPaid = ? WHERE ClientOrderId = ?"
-                , isPaid
+                , !isPaid
 				, orderId);
-		
 	}
 	
 }

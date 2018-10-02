@@ -50,7 +50,6 @@ public class CartController {
         modelAndView.setViewName("cart");
 
         modelAndView.addObject("cart", cart);
-        //modelAndView.addObject("user", currentUser);
         
         modelAndView.addObject("products", products);
 

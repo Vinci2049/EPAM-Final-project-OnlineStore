@@ -5,10 +5,10 @@ import com.epam.training.onlineStore.model.Cart;
 public interface CartService {
 
 	Cart findById (long id);
-	//Map<Product, Integer> getProductList(int idClient);
 
 	void addProductById(long userId, long productId);
 
 	void removeProductById(long userId, long productId);	
 	
+	void clearProductList(long userId);
 }

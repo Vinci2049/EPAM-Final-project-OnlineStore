@@ -31,19 +31,11 @@ public class WebConfiguration implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
     	
-    	
-    	registry.addInterceptor(authInterceptor()).addPathPatterns("/cart", "/cart*", "/cart/**", "/users/*", "/orders/*");
+    		.addPathPatterns("/cart", "/cart/**", "/users/**", "/orders/**");
       //.excludePathPatterns("/login");
-////        registry.addInterceptor(authInterceptor()).addPathPatterns("/**")
-        //.excludePathPatterns("/login", "/registration",
-          //      "/logout", "/css/**", "/js/**", "/checkloginexist");
        
 
-      registry.addInterceptor(userNameAwareInterceptor()).addPathPatterns("/**");
-      	//.excludePathPatterns("/**");
-//        registry.addInterceptor(userNameAwareInterceptor()).addPathPatterns("/**")
-        //.excludePathPatterns("/login",
-        //        "/registration", "/logout", "/css/**", "/js/**", "/checkloginexist");
+    	registry.addInterceptor(userNameAwareInterceptor()).addPathPatterns("/**");
     }
 
 }

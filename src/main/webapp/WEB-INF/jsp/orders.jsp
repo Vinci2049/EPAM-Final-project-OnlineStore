@@ -41,35 +41,22 @@
 							<td>
 							${orderIterator.id}
 							</td>
+
+							<td>
+								${orderIterator.date}
+							</td>
 							
 							<td>
 							<c:if test="${orderIterator.user != null}">
 								${orderIterator.user.login}
 							</c:if>	
 							</td>
-							<%--
-							<td>
-							<c:if test="${orderIterator.user != null}">
-							${orderIterator.user.login}
-							</c:if>
-							</td>
-							<td>
-							<c:if test="${orderIterator.user != null}">
-							${orderIterator.user.name}
-							</c:if>
-							</td>
-							<td>
-								${orderIterator.date}
-							</td>
-							 --%>
 							 
-							<td class="remove" id="pay">
-								<c:if test="${orderIterator.isPaid != false || orderIterator.isPaid != null}">
-								<a href="/orders/${orderIterator.id}/setPaid">
-									<img src="${PaidImg}" title="Оплачено" alt="Отменить оплату">
-								</a>								
+							<td id="pay">
+								<c:if test="${orderIterator.isPaid == true}">
+									<img src="${PaidImg}" title="Оплачено" alt="Оплачено">
 								</c:if>
-								<c:if test="${orderIterator.isPaid == false || orderIterator.isPaid == null}}">
+								<c:if test="${orderIterator.isPaid == false}">
 								<a href="/orders/${orderIterator.id}/setPaid">
 									<img src="${NotPaidImg}" title="Оплатить" alt="Оплатить">
 								</a>								
@@ -95,16 +82,21 @@
 
 						<c:forEach var="productIterator" items="${orderIterator.productList}">
 						<tr>
+						<td></td>
+						<td></td>
+
+							<td>
+								${productIterator.quantity}
+							</td>
+
 							<td>
 								${productIterator.product.name}
 							</td>
+
 							<td>
 								${productIterator.product.price} $
 							</td>
 							
-							<td>
-								${productIterator.quantity}
-							</td>
 						
 						</tr>
 						</c:forEach>
